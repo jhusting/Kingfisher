@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
     private bool spearShot = false;
     private bool spearReturned = true;
 
+
+    //Amount of cash the player has gotten on the current attempt
+    public int currentValue { get; private set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -173,5 +177,10 @@ public class PlayerController : MonoBehaviour
         spearRB.velocity = Vector3.zero;
         spearReturned = true;
         //rope.gameObject.SetActive(false);
+    }
+
+    public void AddCurrentValue(int value)
+    {
+        currentValue += value;
     }
 }
