@@ -88,12 +88,14 @@ public class PlayerController : MonoBehaviour
         if(Input.GetKeyDown("space"))
         {
             StartCoroutine("InhaleBurst");
+            StopCoroutine("SpeedBurst");
             StartCoroutine("SpeedBurst");
             //currOxygen = Mathf.Clamp(currOxygen - 2f, 0f, maxOxygen);
         }
 
         if(Input.GetKeyUp("space"))
         {
+            StopCoroutine("SpeedBurst");
             StartCoroutine("SpeedBurst");
         }
 
@@ -148,6 +150,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator SpeedBurst()
     {
         float time = 0f;
+
         while (time < 2.2f)
         {
             moveSpeed = baseMoveSpeed * burstMovementModifier * (burstCurve.Evaluate(time / 2.2f));
