@@ -30,6 +30,10 @@ public class World : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        PlayerController playerController = FindObjectOfType<PlayerController>();
+        speed = 2 + playerController.moveSpeed;
+
+
         //Check if the oldest tile is off screen yet using AABB
         BackgroundTile tile = backgroundTiles[0];
 

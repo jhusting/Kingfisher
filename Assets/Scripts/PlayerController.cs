@@ -181,6 +181,6 @@ public class PlayerController : MonoBehaviour
 
     public void AddCurrentValue(int value)
     {
-        currentValue += value;
+        currentValue += value;  
     }
 }
