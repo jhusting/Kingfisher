@@ -15,6 +15,14 @@ public class PlayerController : MonoBehaviour
     public float spearMaxDistance = 5f;
     public float spearStrength = 0f;
 
+    private Camera cam;
+    [SerializeField]
+    private float minSize = 4.5f;
+    [SerializeField]
+    private float maxSize = 5.5f;
+    [SerializeField]
+    private float targetSize = 5f;
+
     [SerializeField]
     private float baseMoveSpeed = 1f;
     [SerializeField]
@@ -28,6 +36,11 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private AnimationCurve burstCurve;
+    [SerializeField]
+    private AnimationCurve camZoomCurve;
+    [SerializeField]
+    private AnimationCurve camShakeCurve;
+
 
     private bool spearShot = false;
     private bool spearReturned = true;
@@ -47,6 +60,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         currOxygen = maxOxygen;
+        cam = Camera.main;
+        StartBreathing();
     }
 
     // Update is called once per frame
@@ -64,10 +79,11 @@ public class PlayerController : MonoBehaviour
             rope.SetPositions(pos);
         }
 
+        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, 0.8f*Time.deltaTime);
+
         if (Input.GetKeyDown(KeyCode.A)){
             StartCoroutine(DiveIn(2));
         }
-
 
         ReadInput();
     }
@@ -83,6 +99,12 @@ public class PlayerController : MonoBehaviour
         //currWind.Size = (currWind.StartPos - mouseLocation).magnitude + .4f;
     }
 
+    public void StartBreathing()
+    {
+        StopCoroutine("CamZoom");
+        StartCoroutine("CamZoom");
+    }
+
     void ReadInput()
     {
         if(Input.GetKeyDown("space"))
@@ -90,13 +112,18 @@ public class PlayerController : MonoBehaviour
             StartCoroutine("InhaleBurst");
             StopCoroutine("SpeedBurst");
             StartCoroutine("SpeedBurst");
-            //currOxygen = Mathf.Clamp(currOxygen - 2f, 0f, maxOxygen);
+
+            StopCoroutine("CamZoom");
+            StartCoroutine("CamZoom");
         }
 
         if(Input.GetKeyUp("space"))
         {
             StopCoroutine("SpeedBurst");
             StartCoroutine("SpeedBurst");
+
+            StopCoroutine("CamZoom");
+            StartCoroutine("CamZoom");
         }
 
         if(Input.GetMouseButtonDown(0))
@@ -192,6 +219,24 @@ public class PlayerController : MonoBehaviour
         spearRB.velocity = Vector3.zero;
         spearReturned = true;
         //rope.gameObject.SetActive(false);
+    }
+
+    IEnumerator CamZoom()
+    {
+        float zoomTime = 7f, time = 0f, startingX = cam.transform.position.x;
+
+        while (time < zoomTime)
+        {
+            Vector3 pos = cam.transform.position;
+            targetSize = Mathf.Lerp(maxSize, minSize, camZoomCurve.Evaluate(time / zoomTime));
+
+            time += Time.deltaTime;
+
+            pos.x = startingX + 0.05f * camZoomCurve.Evaluate(time / zoomTime) * camShakeCurve.Evaluate((time % 0.3f) / 0.3f);
+            cam.transform.position = pos;
+
+            yield return null;
+        }
     }
 
     public IEnumerator DiveIn(float diveTime)
