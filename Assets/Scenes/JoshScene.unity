@@ -641,7 +641,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1065,6 +1065,9 @@ MonoBehaviour:
   moveSpeed: 0.2
   spearMaxDistance: 5
   spearStrength: 0
+  minSize: 4.5
+  maxSize: 5.5
+  targetSize: 5
   baseMoveSpeed: 0.2
   burstMovementModifier: 12
   maxOxygen: 100
@@ -1119,6 +1122,117 @@ MonoBehaviour:
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+    m_RotationOrder: 4
+  camZoomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.66442245
+      value: 0.9491814
+      inSlope: 0.31612876
+      outSlope: 0.31612876
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.24337533
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: -0
+      outSlope: -0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.53816766
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  camShakeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: -0.0039034486
+      value: 0.0026479363
+      inSlope: 8.305686
+      outSlope: 8.305686
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.5518048
+    - serializedVersion: 3
+      time: 0.083137885
+      value: 0.3623566
+      inSlope: -0.10225524
+      outSlope: -0.10225524
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 1
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.21328929
+      value: -0.4244318
+      inSlope: -0.069466606
+      outSlope: -0.069466606
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.8853801
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.35908833
+      value: 0.6378529
+      inSlope: 0.08366097
+      outSlope: 0.08366097
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.588529
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.56636965
+      value: -0.71715105
+      inSlope: 0.018856896
+      outSlope: 0.018856896
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.31874636
+    - serializedVersion: 3
+      time: 0.7103768
+      value: 0.97936875
+      inSlope: 0.019319927
+      outSlope: 0.019319927
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.4823161
+    - serializedVersion: 3
+      time: 0.8581611
+      value: -0.99308366
+      inSlope: -0.05019301
+      outSlope: -0.05019301
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.66513675
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.99298376
+      value: 0.0026479363
+      inSlope: 6.6385155
+      outSlope: 6.6385155
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.3845268
+      outWeight: 0
+    m_PreInfinity: 1
+    m_PostInfinity: 1
     m_RotationOrder: 4
 --- !u!4 &882204116
 Transform:
