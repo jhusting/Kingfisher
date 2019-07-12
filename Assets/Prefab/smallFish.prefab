@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5918168266029100936}
   - component: {fileID: 5918168266029100933}
   - component: {fileID: 5918168266029100934}
-  - component: {fileID: 5918168266029100935}
+  - component: {fileID: 3521380042274745654}
   m_Layer: 0
-  m_Name: Fish
+  m_Name: smallFish
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -83,7 +83,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 982009a74ee0aec42b5133e7d4d2cf81, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3ae0ff7e55ffbef4aa8063db0bdf69da, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,7 +94,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &5918168266029100935
+--- !u!61 &3521380042274745654
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,16 +107,16 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.28, y: 0}
+  m_Offset: {x: -0.000000029802322, y: 0.012568712}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0.5}
-    oldSize: {x: 2.56, y: 0.68}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.96, y: 1.71}
     newSize: {x: 2.56, y: 0.68}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.56, y: 0.68}
+  m_Size: {x: 1.7160814, y: 0.93074846}
   m_EdgeRadius: 0

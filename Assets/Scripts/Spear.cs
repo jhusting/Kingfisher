@@ -17,7 +17,7 @@ public class Spear : MonoBehaviour
 
         if (fishHit)
         {
-            fishHit.transform.SetParent(transform);
+            fishHit.transform.SetParent(transform, true);
 
             //Set the collision to disabled to prevent it from knocking other fish around
             col.enabled = false;

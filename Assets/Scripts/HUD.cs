@@ -6,12 +6,15 @@ using UnityEngine.UI;
 public class HUD : MonoBehaviour
 {
     public Text currentValueText;
+    public Text currentDistanceText;
 
     private PlayerController playerController;
+    private World world;
 
     void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
+        world = FindObjectOfType<World>();
     }
 
     // Update is called once per frame
@@ -19,5 +22,6 @@ public class HUD : MonoBehaviour
     {
         //Update the current value text
         currentValueText.text = "Current value: $" + playerController.currentValue.ToString();
+        currentDistanceText.text = world.distanceTravelled.ToString() + "m";
     }
 }

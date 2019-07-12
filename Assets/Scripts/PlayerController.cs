@@ -45,6 +45,13 @@ public class PlayerController : MonoBehaviour
     private bool spearShot = false;
     private bool spearReturned = true;
 
+    [SerializeField]
+    private AnimationCurve diveCurveX;
+
+    [SerializeField]
+    private AnimationCurve diveCurveY;
+    
+
 
     //Amount of cash the player has gotten on the current attempt
     public int currentValue { get; private set; }
@@ -73,6 +80,10 @@ public class PlayerController : MonoBehaviour
         }
 
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, 0.8f*Time.deltaTime);
+
+        if (Input.GetKeyDown(KeyCode.A)){
+            StartCoroutine(DiveIn(2));
+        }
 
         ReadInput();
     }
@@ -223,9 +234,33 @@ public class PlayerController : MonoBehaviour
 
             pos.x = startingX + 0.05f * camZoomCurve.Evaluate(time / zoomTime) * camShakeCurve.Evaluate((time % 0.3f) / 0.3f);
             cam.transform.position = pos;
-            
+
             yield return null;
         }
+    }
+
+    public IEnumerator DiveIn(float diveTime)
+    {
+        PlayerCharacter playerCharacter = FindObjectOfType<PlayerCharacter>();
+        float currentTime = 0;
+        while(currentTime <= diveTime)
+        {
+            float x = diveCurveX.Evaluate(currentTime / diveTime);
+            float y = diveCurveY.Evaluate(currentTime / diveTime);
+
+            //Move player according to the curve
+            playerCharacter.transform.position = new Vector3(x, y, 0);
+
+            Vector3 camStart = new Vector3(-18.54f, 12.47f, -10f);
+            Vector3 camEnd = new Vector3(-8.87f, 0, -10f);
+            Vector3 camLocation = camEnd - (camEnd - camStart) * (1 - currentTime / diveTime);
+            Camera.main.transform.position = camLocation;
+
+            currentTime += Time.deltaTime;
+
+            yield return null;
+        }
+        yield return null;
     }
 
     public void AddCurrentValue(int value)
