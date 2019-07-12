@@ -136,9 +136,9 @@ public class PlayerController : MonoBehaviour
     IEnumerator SpeedBurst()
     {
         float time = 0f;
-        while (time < 0.4f)
+        while (time < 2.2f)
         {
-            moveSpeed = baseMoveSpeed + burstMovementModifier * burstCurve.Evaluate(time / 0.4f);
+            moveSpeed = baseMoveSpeed * burstMovementModifier * (burstCurve.Evaluate(time / 2.2f));
             time += Time.deltaTime;
             yield return null;
         }
