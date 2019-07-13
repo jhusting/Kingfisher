@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public LineRenderer rope;
     public GameObject spearEnd;
     public ParticleSystem bubblePrefab;
+    public ParticleSystem shotBubblesPrefab;
 
     public bool underWater = false;
 
@@ -81,7 +82,6 @@ public class PlayerController : MonoBehaviour
             playerController = this;
         }
 
-
         runFailed = new RunFailedEvent();
     }
 
@@ -105,23 +105,25 @@ public class PlayerController : MonoBehaviour
             AddCash(10000);
         }
 
-
-        RotateToMouse(gun);
-
-        if (spearReturned && !spearShot)
-            RotateToMouse(spear);
-        else
+        if (underWater)
         {
-            Vector3[] pos = new Vector3[2];
-            pos[0] = Vector3.zero;
-            pos[1] = spearEnd.transform.position - rope.transform.position;
-            rope.SetPositions(pos);
+            RotateToMouse(gun);
+
+            if (spearReturned && !spearShot)
+                RotateToMouse(spear);
+            else
+            {
+                Vector3[] pos = new Vector3[2];
+                pos[0] = Vector3.zero;
+                pos[1] = spearEnd.transform.position - rope.transform.position;
+                rope.SetPositions(pos);
+            }
+
+            cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, 0.8f * Time.deltaTime);
+
+            if (currOxygen <= 0f)
+                runFailed.Invoke(RunFailedStatus.NoOxygen);
         }
-
-        cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, 0.8f*Time.deltaTime);
-
-        if (currOxygen <= 0f)
-            runFailed.Invoke(RunFailedStatus.NoOxygen);
 
         ReadInput();
     }
@@ -148,6 +150,8 @@ public class PlayerController : MonoBehaviour
     {
         underWater = false;
         StopAllCoroutines();
+
+        spear.transform.localPosition = Vector3.zero;
 
         Rigidbody2D spearRB = spear.GetComponent<Rigidbody2D>();
         spearRB.gravityScale = 0f;
@@ -207,6 +211,11 @@ public class PlayerController : MonoBehaviour
 
                     spearRB.AddForce((spearMaxDistance * 400f) * spearStrength * direction.normalized);
                     spearRB.gravityScale = 0.2f;
+
+                    // Spawn shot bubble particles
+                    Vector3 partPos = gun.transform.position + gun.transform.rotation * (new Vector3(1.4f, .16f, 0f));
+                    World w = FindObjectOfType<World>();
+                    ParticleSystem ps = Instantiate(shotBubblesPrefab, partPos, gun.transform.rotation, w.GetNewestTile().transform) as ParticleSystem;
 
                     //rope.gameObject.SetActive(true);
                     spearStrength = 0f;

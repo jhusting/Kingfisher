@@ -143,6 +143,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerController: {fileID: 0}
+  bubblePrefab: {fileID: 4846541620361008285, guid: 7c223bad984a1874480e91fa8a9f0534,
+    type: 3}
 --- !u!1 &4760098364976982253
 GameObject:
   m_ObjectHideFlags: 0

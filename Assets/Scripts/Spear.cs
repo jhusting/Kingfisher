@@ -12,6 +12,11 @@ public class Spear : MonoBehaviour
 
     public GameObjectEvent FishCaughtEvent;
 
+    public ParticleSystem bubblePrefab;
+
+    private Rigidbody2D rb;
+    private bool spawningBubbles = false;
+
     void Awake()
     {
 
@@ -21,7 +26,7 @@ public class Spear : MonoBehaviour
     void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
-
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -30,6 +35,17 @@ public class Spear : MonoBehaviour
         {
             float speed = 2f * playerController.moveSpeed;
             transform.position = transform.position + Vector3.left * speed * Time.deltaTime;
+        }
+
+        if (rb.velocity.magnitude > 1f && !spawningBubbles)
+        {
+            float spawnRate = Random.Range(0.03f, 0.07f);
+            //StartCoroutine(SpawnBubbles(spawnRate));
+        }
+        else if (spawningBubbles && rb.velocity.magnitude <= 1f)
+        {
+            StopAllCoroutines();
+            spawningBubbles = false;
         }
     }
 
@@ -47,6 +63,18 @@ public class Spear : MonoBehaviour
             col.enabled = false;
 
             FishCaughtEvent.Invoke(fishHit.gameObject);
+        }
+    }
+
+    IEnumerator SpawnBubbles(float waitTime)
+    {
+        World w = FindObjectOfType<World>();
+        spawningBubbles = true;
+
+        while (true)
+        {
+            ParticleSystem ps = Instantiate(bubblePrefab, transform.position, Quaternion.Euler(new Vector3(-90f, 0f, 0f)), w.GetNewestTile().transform) as ParticleSystem;
+            yield return new WaitForSeconds(waitTime);
         }
     }
 }
