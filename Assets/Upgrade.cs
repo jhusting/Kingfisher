@@ -19,6 +19,7 @@ public class Upgrade : MonoBehaviour
     void Awake()
     {
         currentLevel = 1;
+        maxLevel = 5;
     }
     void Start()
     {
@@ -27,7 +28,7 @@ public class Upgrade : MonoBehaviour
 
     public bool CanAffordUpgrade()
     {
-        return playerController.cash > GetCostToUpgrade();
+        return playerController.cash > GetCostToUpgrade() && currentLevel < maxLevel;
     }
 
     public bool TriggerUpgrade()

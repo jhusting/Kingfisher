@@ -14,7 +14,7 @@ public class MoveSpeedUpgrade : Upgrade
         playerController.AddBaseMoveSpeed(-1 * currentBonus);
 
         //Calculate the new upgrade value
-        float newBonus = level * 0.1f;
+        float newBonus = level * 0.1f * 3/5f;
         playerController.AddBaseMoveSpeed(newBonus);
 
         //Keep track of this number so we can deduct it when the player upgrades again
