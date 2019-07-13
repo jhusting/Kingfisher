@@ -9,6 +9,7 @@ public class World : MonoBehaviour
     public float distanceTravelled { get; private set; }
 
     private List<BackgroundTile> backgroundTiles;
+    private PlayerController pc;
 
     public GameObject backgroundPrefab;
 
@@ -24,50 +25,56 @@ public class World : MonoBehaviour
         {
             backgroundTiles.Add(bt);
         }
-        
+
+        pc = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        PlayerController playerController = FindObjectOfType<PlayerController>();
-        speed = 2 * playerController.moveSpeed;
-
-
-        //Check if the oldest tile is off screen yet using AABB
-        BackgroundTile tile = backgroundTiles[0];
-
-        Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-        if(!GeometryUtility.TestPlanesAABB(planes, tile.GetComponent<Collider2D>().bounds))
+        if (pc.underWater)
         {
-            //If the check fails, we can remove the tile
-            backgroundTiles.RemoveAt(0);
-            Destroy(tile.gameObject);
+            //PlayerController playerController = FindObjectOfType<PlayerController>();
+            speed = 2 * pc.moveSpeed;
 
-            //Create a new tile at the end since we can assume our newest tile does not completely cover the screen anymore
-            BackgroundTile newTile = Instantiate(backgroundPrefab, transform).GetComponent<BackgroundTile>();
 
-            //I cheated and placed the camera so that 0, 0, 0 is at the bottom, since thats much easier than calculating
-            //the location of the bottom of the camera. Probably not the best idea to cheat this early, but at the same time,
-            //getting this thing up and running asap sounds like a solid idea. Also, the coffee is kicking in. Might need some
-            //more tho...hmmm.
-            //TODO: test on different screen sizes
-            newTile.transform.position = Vector3.zero;
-            backgroundTiles.Add(newTile);
-           
+            //Check if the oldest tile is off screen yet using AABB
+            BackgroundTile tile = backgroundTiles[0];
+
+            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+            if (!GeometryUtility.TestPlanesAABB(planes, tile.GetComponent<Collider2D>().bounds))
+            {
+                //If the check fails, we can remove the tile
+                backgroundTiles.RemoveAt(0);
+                Destroy(tile.gameObject);
+
+                //Create a new tile at the end since we can assume our newest tile does not completely cover the screen anymore
+                BackgroundTile newTile = Instantiate(backgroundPrefab, transform).GetComponent<BackgroundTile>();
+
+                //I cheated and placed the camera so that 0, 0, 0 is at the bottom, since thats much easier than calculating
+                //the location of the bottom of the camera. Probably not the best idea to cheat this early, but at the same time,
+                //getting this thing up and running asap sounds like a solid idea. Also, the coffee is kicking in. Might need some
+                //more tho...hmmm.
+                //TODO: test on different screen sizes
+                newTile.transform.position = Vector3.zero;
+                backgroundTiles.Add(newTile);
+
+            }
+
+
+
+            //Move each tile upwards
+            foreach (BackgroundTile go in backgroundTiles)
+            {
+                go.transform.position = go.transform.position + Vector3.left * speed * Time.deltaTime;
+            }
+
+            if (pc.underWater)
+            {
+                //Update the players distance travelled. Might add a modifier here to make the number more appealing to the player.
+                distanceTravelled += speed * Time.deltaTime;
+            }
         }
-        
-          
-        
-        //Move each tile upwards
-        foreach(BackgroundTile go in backgroundTiles)
-        {
-            go.transform.position = go.transform.position + Vector3.left * speed * Time.deltaTime;
-        }
-
-        //Update the players distance travelled. Might add a modifier here to make the number more appealing to the player.
-        distanceTravelled += speed * Time.deltaTime;
-        
     }
 
 
@@ -82,6 +89,12 @@ public class World : MonoBehaviour
         //the worlds move speed
         BackgroundTile newestTile = GetNewestTile();
         Fish newFish = Instantiate(fishPrefab, newestTile.transform);
+
+        Vector3 newScale = newestTile.transform.localScale;
+        newScale.x = 1f / newScale.x;
+        newScale.y = 1f / newScale.y;
+        newScale.z = 1f / newScale.z;
+        newFish.transform.localScale = newScale;
 
         //Give it a randomized height
         newFish.transform.position = location;

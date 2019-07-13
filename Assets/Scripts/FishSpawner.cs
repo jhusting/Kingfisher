@@ -34,38 +34,42 @@ public class FishSpawner : MonoBehaviour
 
     public IEnumerator SpawnFish()
     {
+        PlayerController pc = FindObjectOfType<PlayerController>();
         while (true)
         {
-            //Calculating when the next fish should spawn
-            float timeTillNextSpawn = timeBetweenSpawns + Random.Range(-1 * spawnTimeVariance, spawnTimeVariance);
-            yield return new WaitForSeconds(timeTillNextSpawn);
-
-
-
-            //Get all possible fish
-            float distance = world.distanceTravelled;
-            List<Fish> possibleFish = new List<Fish>();
-
-            foreach(FishSpawnData fsd in fishSpawnData)
+            if (pc.underWater)
             {
-                if(distance > fsd.minimumDistanceToSpawn && distance < fsd.maximumDistanceToSpawn)
+                //Calculating when the next fish should spawn
+                float timeTillNextSpawn = timeBetweenSpawns + Random.Range(-1 * spawnTimeVariance, spawnTimeVariance);
+                yield return new WaitForSeconds(timeTillNextSpawn);
+
+
+
+                //Get all possible fish
+                float distance = world.distanceTravelled;
+                List<Fish> possibleFish = new List<Fish>();
+
+                foreach (FishSpawnData fsd in fishSpawnData)
                 {
-                    possibleFish.Add(fsd.fish);
+                    if (distance > fsd.minimumDistanceToSpawn && distance < fsd.maximumDistanceToSpawn)
+                    {
+                        possibleFish.Add(fsd.fish);
+                    }
                 }
+
+                //Select the fish from the list of valid fish
+                int chosenFishIndex = Mathf.FloorToInt(Random.Range(0, possibleFish.Count));
+
+
+                //Give it a randomized height
+                Vector3 fishPosition = Vector3.up * Random.Range(minimumSpawnHeight, maximumSpawnHeight);
+
+                //Tell the world to add the new fish
+                world.AddNewFish(possibleFish[chosenFishIndex], fishPosition);
+                yield return null;
             }
 
-            //Select the fish from the list of valid fish
-            int chosenFishIndex = Random.Range(0, possibleFish.Count);
-
-
-            //Give it a randomized height
-            Vector3 fishPosition = Vector3.up * Random.Range(minimumSpawnHeight, maximumSpawnHeight);
-
-            //Tell the world to add the new fish
-            world.AddNewFish(possibleFish[chosenFishIndex], fishPosition);
-
-
+            yield return null;
         }
-        
     }
 }

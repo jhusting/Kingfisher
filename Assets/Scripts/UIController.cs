@@ -13,6 +13,8 @@ public class UIController : MonoBehaviour
 
     public PlayerController pc;
 
+    public CanvasGroup underHUD;
+
     [SerializeField]
     private AnimationCurve oxyShakeStrength;
     [SerializeField]
@@ -31,6 +33,12 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (pc.underWater)
+        {
+            underHUD.alpha = 1f;
+        }
+        else
+            underHUD.alpha = 0f;
         oxySlider.value = pc.GetOxygenPercent();
         currSpeed.text = "" + pc.moveSpeed;
 
@@ -60,7 +68,7 @@ public class UIController : MonoBehaviour
 
         for (; time < shakeTime; time += Time.deltaTime)
         {
-            float newX = oxyStartPos.x + (shakeCurve.Evaluate(time / shakeTime) - 0.5f) * strength * 6f;
+            float newX = oxyStartPos.x + (shakeCurve.Evaluate(time / shakeTime) - 0.5f) * strength * 0.3f;
 
             oxyRect.anchoredPosition = new Vector2(newX, oxyStartPos.y);
 

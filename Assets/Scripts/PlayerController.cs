@@ -10,6 +10,8 @@ public class PlayerController : MonoBehaviour
     public LineRenderer rope;
     public GameObject spearEnd;
 
+    public bool underWater = false;
+
     public float moveSpeed = 1f;
 
     public float spearMaxDistance = 5f;
@@ -61,7 +63,7 @@ public class PlayerController : MonoBehaviour
     {
         currOxygen = maxOxygen;
         cam = Camera.main;
-        StartBreathing();
+        //StartBreathing();
     }
 
     // Update is called once per frame
@@ -81,10 +83,6 @@ public class PlayerController : MonoBehaviour
 
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, 0.8f*Time.deltaTime);
 
-        if (Input.GetKeyDown(KeyCode.A)){
-            StartCoroutine(DiveIn(2));
-        }
-
         ReadInput();
     }
 
@@ -101,59 +99,67 @@ public class PlayerController : MonoBehaviour
 
     public void StartBreathing()
     {
+        underWater = true;
         StopCoroutine("CamZoom");
         StartCoroutine("CamZoom");
     }
 
     void ReadInput()
     {
-        if(Input.GetKeyDown("space"))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
-            StartCoroutine("InhaleBurst");
-            StopCoroutine("SpeedBurst");
-            StartCoroutine("SpeedBurst");
-
-            StopCoroutine("CamZoom");
-            StartCoroutine("CamZoom");
+            StartCoroutine(DiveIn(2));
         }
-
-        if(Input.GetKeyUp("space"))
+        if (underWater)
         {
-            StopCoroutine("SpeedBurst");
-            StartCoroutine("SpeedBurst");
-
-            StopCoroutine("CamZoom");
-            StartCoroutine("CamZoom");
-        }
-
-        if(Input.GetMouseButtonDown(0))
-        {
-            if (!spearShot)
+            if (Input.GetKeyDown("space"))
             {
-                StartCoroutine("SpearCharge");
+                StartCoroutine("InhaleBurst");
+                StopCoroutine("SpeedBurst");
+                StartCoroutine("SpeedBurst");
+
+                StopCoroutine("CamZoom");
+                StartCoroutine("CamZoom");
             }
-            else
-                StartCoroutine("SpearReturn");
-        }
 
-        if(Input.GetMouseButtonUp(0))
-        {
-            if (!spearShot)
+            if (Input.GetKeyUp("space"))
             {
-                Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - spear.transform.position;
-                Rigidbody2D spearRB = spear.GetComponent<Rigidbody2D>();
+                StopCoroutine("SpeedBurst");
+                StartCoroutine("SpeedBurst");
 
-                spearRB.AddForce((spearMaxDistance * 400f) * spearStrength * direction.normalized);
-                spearRB.gravityScale = 0.2f;
-
-                //rope.gameObject.SetActive(true);
-                spearStrength = 0f;
-                spearShot = true;
-                spearReturned = false;
+                StopCoroutine("CamZoom");
+                StartCoroutine("CamZoom");
             }
-            else
+
+            if (Input.GetMouseButtonDown(0))
             {
-                spearShot = false;
+                if (!spearShot)
+                {
+                    StartCoroutine("SpearCharge");
+                }
+                else
+                    StartCoroutine("SpearReturn");
+            }
+
+            if (Input.GetMouseButtonUp(0))
+            {
+                if (!spearShot)
+                {
+                    Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - spear.transform.position;
+                    Rigidbody2D spearRB = spear.GetComponent<Rigidbody2D>();
+
+                    spearRB.AddForce((spearMaxDistance * 400f) * spearStrength * direction.normalized);
+                    spearRB.gravityScale = 0.2f;
+
+                    //rope.gameObject.SetActive(true);
+                    spearStrength = 0f;
+                    spearShot = true;
+                    spearReturned = false;
+                }
+                else
+                {
+                    spearShot = false;
+                }
             }
         }
     }
@@ -260,6 +266,8 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+
+        StartBreathing();
         yield return null;
     }
 

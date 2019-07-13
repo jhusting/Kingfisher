@@ -17,7 +17,9 @@ public class Spear : MonoBehaviour
 
         if (fishHit)
         {
+            Quaternion rot = fishHit.transform.rotation;
             fishHit.transform.SetParent(transform, true);
+            fishHit.transform.rotation = rot;
 
             //Set the collision to disabled to prevent it from knocking other fish around
             col.enabled = false;
