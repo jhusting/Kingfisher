@@ -13,6 +13,10 @@ GameObject:
   - component: {fileID: 464654017}
   - component: {fileID: 464654018}
   - component: {fileID: 464654020}
+  - component: {fileID: 2391107075630663127}
+  - component: {fileID: 6702173423090178510}
+  - component: {fileID: 464654019}
+  - component: {fileID: 3241363445255002004}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -58,8 +62,8 @@ MonoBehaviour:
   moveSpeed: 0.2
   spearMaxDistance: 5
   spearStrength: 0
-  minSize: 4.5
-  maxSize: 5.5
+  minSize: 7
+  maxSize: 9
   targetSize: 5
   baseMoveSpeed: 0.2
   burstMovementModifier: 11
@@ -341,9 +345,9 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: -19
-      inSlope: 25
-      outSlope: 25
+      value: -30
+      inSlope: 80
+      outSlope: 80
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
@@ -359,9 +363,9 @@ MonoBehaviour:
       outWeight: 0.09398231
     - serializedVersion: 3
       time: 1
-      value: -12
-      inSlope: 2.5
-      outSlope: 2.5
+      value: -7
+      inSlope: 8.75
+      outSlope: 8.75
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -374,18 +378,18 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 12
-      inSlope: 15
-      outSlope: 15
+      value: 7.13
+      inSlope: 23.229277
+      outSlope: 23.229277
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.2
-      value: 15
-      inSlope: 0
-      outSlope: 0
+      time: 0.17052002
+      value: 11.091057
+      inSlope: 13.595079
+      outSlope: 13.595079
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -393,17 +397,17 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.4
       value: 12
-      inSlope: -17.5
-      outSlope: -17.5
+      inSlope: -7.8862257
+      outSlope: -7.8862257
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: 0
-      inSlope: -20
-      outSlope: -20
+      value: 0.16
+      inSlope: -19.733334
+      outSlope: -19.733334
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -424,6 +428,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: Move Speed
+  moveSpeedPerLevel: 0.06
 --- !u!114 &464654018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,7 +442,62 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   upgradeName: Harpoon Power
+  powerPerLevel: 1
 --- !u!114 &464654020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886316959076540046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca1d37895944bee449bbb5207f157020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2391107075630663127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886316959076540046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d3fea81d34cc74cb6b6b601e4df815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeName: Move Speed
+  moveSpeedPerLevel: 0.06
+--- !u!114 &6702173423090178510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886316959076540046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5868467c3b14744994f9578f021c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeName: Harpoon Power
+  powerPerLevel: 1
+--- !u!114 &464654019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886316959076540046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0469423025d064d8ea28d681196541, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeName: Oxygen
+  bonusPerLevel: 30
+--- !u!114 &3241363445255002004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

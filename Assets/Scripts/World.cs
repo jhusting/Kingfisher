@@ -218,6 +218,24 @@ public class World : MonoBehaviour
     }
 
 
+    public void AttachObjectToForeground(GameObject obj)
+    {
+        GameObject lastTile = foregroundTiles[foregroundTiles.Count - 1].gameObject;
+        obj.transform.SetParent(lastTile.transform, true);
+    }
+
+    public void AttachObjectToBackground(GameObject obj)
+    {
+        GameObject lastTile = backgroundTiles[backgroundTiles.Count - 1].gameObject;
+        obj.transform.SetParent(lastTile.transform, true);
+    }
+
+    public void AttachObjectToMiddleground(GameObject obj)
+    { 
+        GameObject lastTile = middlegroundTiles[middlegroundTiles.Count - 1].gameObject;
+        obj.transform.SetParent(lastTile.transform, true);
+    }
+
     public BackgroundTile GetNewestTile()
     {
         return backgroundTiles[1];

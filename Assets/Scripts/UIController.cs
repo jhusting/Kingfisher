@@ -24,12 +24,16 @@ public class UIController : MonoBehaviour
     private float waitTime = 0.8f;
     private bool shaking = false;
 
+    public Canvas worldSpaceCanvas;
+
     private Vector2 oxyStartPos;
     // Start is called before the first frame update
     void Start()
     {
         oxyRect = oxySlider.GetComponent<RectTransform>();
         oxyStartPos = oxyRect.anchoredPosition;
+
+        FindObjectOfType<Spear>().FishCaughtEvent.AddListener(SpawnMoneyPopup2);
     }
 
     // Update is called once per frame
@@ -56,6 +60,19 @@ public class UIController : MonoBehaviour
 
         OxygenTick();
     }
+
+    public void SpawnMoneyPopup2(GameObject fish)
+    {
+        Fish asFish = fish.GetComponent<Fish>();
+
+        MoneyPopup newPopup = Instantiate(moneyPopupPrefab, transform) as MoneyPopup;
+        RectTransform popRect = newPopup.GetComponent<RectTransform>();
+        popRect.SetParent(transform, false);
+        popRect.position = Camera.main.WorldToViewportPoint(fish.transform.position);
+
+        newPopup.SetMoneyAmount(asFish.value);
+    }
+
 
     public void SpawnMoneyPopup(Vector3 worldPosition, int value)
     {
