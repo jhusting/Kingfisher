@@ -546,6 +546,7 @@ MonoBehaviour:
   underHUD: {fileID: 0}
   moneyPopupPrefab: {fileID: 3489449489252236334, guid: 913a839162cbf014aa7a1e879c125838,
     type: 3}
+  HUD: {fileID: 803716330}
   oxyShakeStrength:
     serializedVersion: 2
     m_Curve:
@@ -2908,7 +2909,10 @@ PrefabInstance:
       propertyPath: spearEnd
       value: 
       objectReference: {fileID: 1150251629}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6702173423090178510, guid: 7f31120ac2d318e41978a411409d3d4a, type: 3}
+    - {fileID: 2391107075630663127, guid: 7f31120ac2d318e41978a411409d3d4a, type: 3}
+    - {fileID: 464654020, guid: 7f31120ac2d318e41978a411409d3d4a, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7f31120ac2d318e41978a411409d3d4a, type: 3}
 --- !u!4 &1212880225 stripped
 Transform:
