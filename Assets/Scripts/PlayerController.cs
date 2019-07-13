@@ -46,18 +46,22 @@ public class PlayerController : MonoBehaviour
 
 
     private bool spearShot = false;
-    private bool spearReturned = true;
+    public bool spearReturned = true;
 
     [SerializeField]
     private AnimationCurve diveCurveX;
 
     [SerializeField]
     private AnimationCurve diveCurveY;
-    
 
-
+    private RunFailedEvent runFailed;
     //Amount of cash the player has gotten on the current attempt
     public int currentValue { get; private set; }
+
+    private void Awake()
+    {
+        runFailed = new RunFailedEvent();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -83,6 +87,9 @@ public class PlayerController : MonoBehaviour
         }
 
         cam.orthographicSize = Mathf.Lerp(cam.orthographicSize, targetSize, 0.8f*Time.deltaTime);
+
+        if (currOxygen <= 0f)
+            runFailed.Invoke(RunFailedStatus.NoOxygen);
 
         ReadInput();
     }
@@ -190,7 +197,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator ExhaleParticles()
     {
         Vector3 partPos = gun.transform.position;
-        partPos.x -= .475f;
+        partPos.x -= .27f;
         partPos.y += .137f;
 
         World w = FindObjectOfType<World>();
@@ -277,6 +284,8 @@ public class PlayerController : MonoBehaviour
 
             yield return null;
         }
+
+        runFailed.Invoke(RunFailedStatus.HeldBreath);
     }
 
     public IEnumerator DiveIn(float diveTime)

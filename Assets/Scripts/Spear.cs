@@ -11,6 +11,15 @@ public class Spear : MonoBehaviour
         playerController = FindObjectOfType<PlayerController>();
     }
 
+    private void Update()
+    {
+        if(!playerController.spearReturned)
+        {
+            float speed = 2f * playerController.moveSpeed;
+            transform.position = transform.position + Vector3.left * speed * Time.deltaTime;
+        }
+    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
         Fish fishHit = col.gameObject.GetComponent<Fish>();
