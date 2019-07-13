@@ -59,6 +59,9 @@ public class Spear : MonoBehaviour
             fishHit.transform.SetParent(transform, true);
             fishHit.transform.rotation = rot;
 
+            UIController uic = FindObjectOfType<UIController>();
+            //uic.SpawnMoneyPopup(fishHit.transform.position, fishHit.value);
+
             //Set the collision to disabled to prevent it from knocking other fish around
             col.enabled = false;
 
