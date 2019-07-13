@@ -28,7 +28,7 @@ public class FishSpawner : MonoBehaviour
     {
         world = GetComponent<World>();
 
-        //StartCoroutine(SpawnFish());
+        StartCoroutine(SpawnFish());
     }
 
 
@@ -51,18 +51,19 @@ public class FishSpawner : MonoBehaviour
 
                 foreach (FishSpawnData fsd in fishSpawnData)
                 {
-                    if (distance > fsd.minimumDistanceToSpawn && distance < fsd.maximumDistanceToSpawn)
+                    if (distance >= fsd.minimumDistanceToSpawn && distance <= fsd.maximumDistanceToSpawn)
                     {
                         possibleFish.Add(fsd.fish);
                     }
                 }
 
                 //Select the fish from the list of valid fish
-                int chosenFishIndex = Mathf.FloorToInt(Random.Range(0, possibleFish.Count));
+                int chosenFishIndex = Random.Range(0, possibleFish.Count);
 
 
                 //Give it a randomized height
                 Vector3 fishPosition = Vector3.up * Random.Range(minimumSpawnHeight, maximumSpawnHeight);
+                fishPosition.x = 22;
 
                 //Tell the world to add the new fish
                 world.AddNewFish(possibleFish[chosenFishIndex], fishPosition);

@@ -15,6 +15,12 @@ public class World : MonoBehaviour
     private List<MiddlegroundTile> middlegroundTiles;
     private List<ForegroundTile> foregroundTiles;
 
+
+    //By default all fish are speed up based on the world speed. Lowering this will lower the effect world speed has on fish.
+    public float fishSpeedModifier = 1f;
+
+    public GameObject fishHolder;
+
     private PlayerController pc;
 
     public GameObject backgroundPrefab;
@@ -202,6 +208,12 @@ public class World : MonoBehaviour
                 //Update the players distance travelled. Might add a modifier here to make the number more appealing to the player.
                 distanceTravelled += backgroundSpeed * pc.moveSpeed * Time.deltaTime;
             }
+
+
+
+
+            //Move the fish!
+            fishHolder.transform.position = fishHolder.transform.position + Vector3.right * -1 * middlegroundSpeed * fishSpeedModifier * Time.deltaTime;
         }
     }
 
@@ -220,16 +232,15 @@ public class World : MonoBehaviour
     {
         //All fish will spawn slightly to the right of the screen, so we attach it to the newest BackgroundTile to easily have it move with
         //the worlds move speed
-        BackgroundTile newestTile = GetNewestTile();
-        Fish newFish = Instantiate(fishPrefab, newestTile.transform);
+        Fish newFish = Instantiate(fishPrefab, fishHolder.transform, true);
 
-        Vector3 newScale = newestTile.transform.localScale;
-        newScale.x = 1f / newScale.x;
-        newScale.y = 1f / newScale.y;
-        newScale.z = 1f / newScale.z;
+        Vector3 newScale = fishHolder.transform.localScale;
+        newScale.x = newFish.transform.localScale.x / newScale.x;
+        newScale.y = newFish.transform.localScale.y / newScale.y;
+        newScale.z = newFish.transform.localScale.y / newScale.z;
         newFish.transform.localScale = newScale;
+        
 
-        //Give it a randomized height
         newFish.transform.position = location;
     }
 }
