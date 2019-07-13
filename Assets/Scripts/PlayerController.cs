@@ -69,6 +69,8 @@ public class PlayerController : MonoBehaviour
         currOxygen = maxOxygen;
         cam = Camera.main;
         //StartBreathing();
+
+        spear.GetComponent<Spear>().FishCaughtEvent.AddListener(OnFishCaught);
     }
 
     // Update is called once per frame
@@ -314,8 +316,8 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    public void AddCurrentValue(int value)
+    public void OnFishCaught(GameObject fish)
     {
-        currentValue += value;  
+        currentValue += fish.GetComponent<Fish>().value;  
     }
 }
