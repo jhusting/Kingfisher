@@ -1750,6 +1750,26 @@ PrefabInstance:
       propertyPath: spearEnd
       value: 
       objectReference: {fileID: 749081849}
+    - target: {fileID: 886316959076540047, guid: 7f31120ac2d318e41978a411409d3d4a,
+        type: 3}
+      propertyPath: burstCurve.m_Curve.Array.data[4].value
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 886316959076540047, guid: 7f31120ac2d318e41978a411409d3d4a,
+        type: 3}
+      propertyPath: burstCurve.m_Curve.Array.data[4].time
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 886316959076540047, guid: 7f31120ac2d318e41978a411409d3d4a,
+        type: 3}
+      propertyPath: baseMoveSpeed
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 886316959076540047, guid: 7f31120ac2d318e41978a411409d3d4a,
+        type: 3}
+      propertyPath: burstMovementModifier
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 886316959076540040, guid: 7f31120ac2d318e41978a411409d3d4a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1788,7 +1808,7 @@ PrefabInstance:
     - target: {fileID: 886316959076540040, guid: 7f31120ac2d318e41978a411409d3d4a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 886316959076540040, guid: 7f31120ac2d318e41978a411409d3d4a,
         type: 3}
@@ -2047,7 +2067,7 @@ Transform:
   m_Children:
   - {fileID: 263959189}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1734124498
 GameObject:

@@ -105,6 +105,21 @@ public class PlayerController : MonoBehaviour
         StartCoroutine("CamZoom");
     }
 
+    public void StopBreathing()
+    {
+        underWater = false;
+        StopAllCoroutines();
+
+        Rigidbody2D spearRB = spear.GetComponent<Rigidbody2D>();
+        spearRB.gravityScale = 0f;
+        spearRB.velocity = Vector3.zero;
+        spearReturned = true;
+
+        targetSize = maxSize;
+        spearShot = false;
+        spearReturned = true;
+    }
+
     void ReadInput()
     {
         if (Input.GetKeyDown(KeyCode.Q))
@@ -130,6 +145,8 @@ public class PlayerController : MonoBehaviour
 
                 StopCoroutine("CamZoom");
                 StartCoroutine("CamZoom");
+
+                StartCoroutine("ExhaleParticles");
             }
 
             if (Input.GetMouseButtonDown(0))
@@ -170,6 +187,22 @@ public class PlayerController : MonoBehaviour
         return Mathf.Clamp(currOxygen / maxOxygen, 0f, 1f);
     }
 
+    IEnumerator ExhaleParticles()
+    {
+        Vector3 partPos = gun.transform.position;
+        partPos.x -= .475f;
+        partPos.y += .137f;
+
+        World w = FindObjectOfType<World>();
+        int numPart = Mathf.FloorToInt(Random.Range(2f, 5f));
+
+        for (int i = 0; i < numPart; ++i)
+        {
+            ParticleSystem ps = Instantiate(bubblePrefab, partPos, Quaternion.Euler(new Vector3(-90f, 0f, 0f)), w.GetNewestTile().transform) as ParticleSystem;
+            yield return new WaitForSeconds(0.04f);
+        }
+    }
+
     IEnumerator InhaleBurst()
     {
         float time = 0f;
@@ -187,7 +220,7 @@ public class PlayerController : MonoBehaviour
 
         while (time < 2.2f)
         {
-            moveSpeed = baseMoveSpeed * burstMovementModifier * (burstCurve.Evaluate(time / 2.2f));
+            moveSpeed = baseMoveSpeed + baseMoveSpeed * burstMovementModifier * (burstCurve.Evaluate(time / 2.2f));
             time += Time.deltaTime;
             yield return null;
         }
