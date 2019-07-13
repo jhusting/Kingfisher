@@ -10,6 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 886316959076540040}
   - component: {fileID: 886316959076540047}
+  - component: {fileID: 464654017}
+  - component: {fileID: 464654018}
+  - component: {fileID: 464654020}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -48,6 +51,8 @@ MonoBehaviour:
   rope: {fileID: 0}
   spearEnd: {fileID: 0}
   bubblePrefab: {fileID: 4846541620361008285, guid: 7c223bad984a1874480e91fa8a9f0534,
+    type: 3}
+  shotBubblesPrefab: {fileID: 396426738658765641, guid: 83f081eb26c72014f87bd3d8dce37fbf,
     type: 3}
   underWater: 0
   moveSpeed: 0.2
@@ -406,3 +411,41 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &464654017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886316959076540046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49d3fea81d34cc74cb6b6b601e4df815, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeName: Move Speed
+--- !u!114 &464654018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886316959076540046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5868467c3b14744994f9578f021c79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upgradeName: Harpoon Power
+--- !u!114 &464654020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 886316959076540046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca1d37895944bee449bbb5207f157020, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -15,6 +15,8 @@ public class UIController : MonoBehaviour
 
     public CanvasGroup underHUD;
 
+    public MoneyPopup moneyPopupPrefab;
+
     [SerializeField]
     private AnimationCurve oxyShakeStrength;
     [SerializeField]
@@ -53,6 +55,16 @@ public class UIController : MonoBehaviour
             strengthSlider.value = 0f;
 
         OxygenTick();
+    }
+
+    public void SpawnMoneyPopup(Vector3 worldPosition, int value)
+    {
+        MoneyPopup newPopup = Instantiate(moneyPopupPrefab, transform) as MoneyPopup;
+        RectTransform popRect = newPopup.GetComponent<RectTransform>();
+        popRect.SetParent(transform, false);
+        popRect.position = Camera.main.WorldToScreenPoint(worldPosition);
+
+        newPopup.SetMoneyAmount(value);
     }
 
     void OxygenTick()
