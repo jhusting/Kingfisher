@@ -11,11 +11,11 @@ public class MoveSpeedUpgrade : Upgrade
     public override void SetUpgradeLevel(int level)
     {
         //Undo whatever the last upgrade had done
-        playerController.moveSpeed -= currentBonus;
+        playerController.AddBaseMoveSpeed(-1 * currentBonus);
 
         //Calculate the new upgrade value
-        float newBonus = level * 0.5f;
-        playerController.moveSpeed += newBonus;
+        float newBonus = level * 0.1f;
+        playerController.AddBaseMoveSpeed(newBonus);
 
         //Keep track of this number so we can deduct it when the player upgrades again
         currentBonus = newBonus;

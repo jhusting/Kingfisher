@@ -363,6 +363,11 @@ public class PlayerController : MonoBehaviour
         World.world.ResetRun();
     }
 
+    public void AddBaseMoveSpeed(float amount)
+    {
+        baseMoveSpeed += amount;
+    }
+
     public void AddCash(int amount)
     {
         cash += amount;
