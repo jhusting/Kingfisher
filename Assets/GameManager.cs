@@ -57,7 +57,7 @@ public class GameManager : MonoBehaviour
     void OnRunFailed(RunFailedStatus status)
     {
         gameLostScreen.SetActive(true);
-
+        playerController.FinishRun();
 
     }
 
@@ -77,7 +77,6 @@ public class GameManager : MonoBehaviour
 
         Camera.main.transform.position = cameraInitialPos;
 
-        playerController.FinishRun();
 
         gameLostScreen.SetActive(false);
         
@@ -89,6 +88,7 @@ public class GameManager : MonoBehaviour
         {
             //Player has won
             gameOverScreen.gameObject.SetActive(true);
+            playerController.FinishRun();
             FindObjectOfType<FishSpawner>().RemoveKingFish();
         }
     }

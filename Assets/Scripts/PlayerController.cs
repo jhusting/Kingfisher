@@ -49,6 +49,9 @@ public class PlayerController : MonoBehaviour
     private bool spearShot = false;
     public bool spearReturned = true;
 
+
+    Coroutine swimUpRoutine;
+
     [SerializeField]
     private AnimationCurve diveCurveX;
 
@@ -62,7 +65,7 @@ public class PlayerController : MonoBehaviour
     //Amount of cash the player has gotten on the current attempt
     public int currentValue { get; private set; }
 
-
+    PlayerCharacter playerCharacter;
 
 
     public static PlayerController playerController { get; private set; }
@@ -90,6 +93,7 @@ public class PlayerController : MonoBehaviour
         //StartBreathing();
 
         spear.GetComponent<Spear>().FishCaughtEvent.AddListener(OnFishCaught);
+        playerCharacter = FindObjectOfType<PlayerCharacter>();
     }
 
     // Update is called once per frame
@@ -339,6 +343,12 @@ public class PlayerController : MonoBehaviour
         }
 
         StartBreathing();
+        spear.GetComponent<Collider2D>().enabled = true;
+        if(swimUpRoutine != null)
+        {
+            StopCoroutine(swimUpRoutine);
+        }
+
         yield return null;
     }
 
@@ -360,7 +370,23 @@ public class PlayerController : MonoBehaviour
 
         currOxygen = maxOxygen;
 
+        spear.GetComponent<Collider2D>().enabled = false;
+        StopBreathing();
+        swimUpRoutine = StartCoroutine(SwimUp());
+
         World.world.ResetRun();
+    }
+    
+    IEnumerator SwimUp()
+    {
+        float swimUpSpeed = 1f;
+
+        //The coroutine is stopped when the player starts a new run
+        while (true)
+        {
+            playerCharacter.transform.position += Vector3.up * swimUpSpeed * Time.deltaTime;
+            yield return null;
+        }
     }
 
     public void AddBaseMoveSpeed(float amount)
