@@ -5,6 +5,8 @@ using UnityEngine;
 public class MoveSpeedUpgrade : Upgrade
 {
 
+    public float moveSpeedPerLevel = 0.06f;
+
     float currentBonus = 0;
 
     
@@ -14,7 +16,7 @@ public class MoveSpeedUpgrade : Upgrade
         playerController.AddBaseMoveSpeed(-1 * currentBonus);
 
         //Calculate the new upgrade value
-        float newBonus = level * 0.1f * 3/5f;
+        float newBonus = level * moveSpeedPerLevel;
         playerController.AddBaseMoveSpeed(newBonus);
 
         //Keep track of this number so we can deduct it when the player upgrades again

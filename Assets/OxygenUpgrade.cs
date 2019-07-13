@@ -2,27 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HarpoonPowerUpgrade : Upgrade
+public class OxygenUpgrade : Upgrade
 {
+    public float bonusPerLevel = 30f;
 
-    public float powerPerLevel = 1f;
     float currentBonus = 0;
 
     public override void SetUpgradeLevel(int i)
     {
-        playerController.spearMaxDistance -= currentBonus;
 
-        float newBonus = i * powerPerLevel;
+        playerController.AddMaxOxygen(-1 * currentBonus);
 
-        playerController.spearMaxDistance += newBonus;
+        float newBonus = bonusPerLevel * i;
+        playerController.AddMaxOxygen(newBonus);
 
         currentBonus = newBonus;
+        
 
         base.SetUpgradeLevel(i);
     }
 
     public override string GetDescription()
     {
-        return "Increases harpoon power by an additional 2";
+        return "Increases the amount of oxygen available";
     }
 }

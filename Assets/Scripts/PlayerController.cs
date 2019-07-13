@@ -140,6 +140,7 @@ public class PlayerController : MonoBehaviour
     public void StartBreathing()
     {
         underWater = true;
+        currOxygen = maxOxygen;
         StopCoroutine("CamZoom");
         StartCoroutine("CamZoom");
     }
@@ -397,5 +398,10 @@ public class PlayerController : MonoBehaviour
     public void AddCash(int amount)
     {
         cash += amount;
+    }
+
+    public void AddMaxOxygen(float amount)
+    {
+        maxOxygen += amount;
     }
 }
