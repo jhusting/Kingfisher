@@ -47,6 +47,8 @@ MonoBehaviour:
   gun: {fileID: 0}
   rope: {fileID: 0}
   spearEnd: {fileID: 0}
+  bubblePrefab: {fileID: 4846541620361008285, guid: 7c223bad984a1874480e91fa8a9f0534,
+    type: 3}
   underWater: 0
   moveSpeed: 0.2
   spearMaxDistance: 5

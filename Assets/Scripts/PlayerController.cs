@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GameObject gun;
     public LineRenderer rope;
     public GameObject spearEnd;
+    public ParticleSystem bubblePrefab;
 
     public bool underWater = false;
 
