@@ -305,6 +305,7 @@ public class PlayerController : MonoBehaviour
         spearRB.gravityScale = 0f;
         spearRB.velocity = Vector3.zero;
         spearReturned = true;
+        spearShot = false;
         //rope.gameObject.SetActive(false);
     }
 
