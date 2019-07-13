@@ -342,8 +342,10 @@ public class PlayerController : MonoBehaviour
             //Move player according to the curve
             playerCharacter.transform.position = new Vector3(x, y, 0);
 
-            Vector3 camStart = new Vector3(-18.54f, 12.47f, -10f);
-            Vector3 camEnd = new Vector3(-8.87f, 0, -10f);
+            Vector3 camStart = new Vector3(-26.7f, 7.85f, -10f);
+            Vector3 camEnd = new Vector3(0, -1.76f, -10f);
+
+            Camera.main.orthographicSize = 9.06f - (9.06f - 7) * (1 - currentTime / diveTime);
             Vector3 camLocation = camEnd - (camEnd - camStart) * (1 - currentTime / diveTime);
             Camera.main.transform.position = camLocation;
 

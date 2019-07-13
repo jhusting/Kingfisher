@@ -71,29 +71,26 @@ public class World : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (pc.underWater)
+        //if (pc.underWater)
         {
 
 
+
             //Check if the oldest tile is off screen yet using AABB
-            BackgroundTile tile = backgroundTiles[0];
+            BackgroundTile btile = backgroundTiles[0];
 
-            Vector3 point = Camera.main.ViewportToWorldPoint(new Vector3(0, 0.5f, 0));
-            point.z = 0;
+            //planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+            //if (!GeometryUtility.TestPlanesAABB(planes, tile.GetComponent<Collider2D>().bounds))
+            float backgroundTileSize = btile.GetComponent<BoxCollider2D>().size.x;
 
-            Debug.Log("Point " + point.ToString());
-            if (!tile.GetComponent<Collider2D>().OverlapPoint(point))
-            {
-                Debug.Log("SHOULD REMOVE TILE");
-            }
-
-
-            Plane[] planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-            if (!GeometryUtility.TestPlanesAABB(planes, tile.GetComponent<Collider2D>().bounds))
+            //At -size distance we are entirely on screen, at -2 we are entirely off screen. giving -2.5 for a little bit of leeway
+            //so players dont see popping in and out
+            float despawnX = backgroundTileSize * -2.5f;
+            if (btile.transform.position.x < despawnX)
             {
                 //If the check fails, we can remove the tile
                 backgroundTiles.RemoveAt(0);
-                Destroy(tile.gameObject);
+                Destroy(btile.gameObject);
 
                 //Create a new tile at the end since we can assume our newest tile does not completely cover the screen anymore
                 BackgroundTile newTile = Instantiate(backgroundPrefab, transform).GetComponent<BackgroundTile>();
@@ -103,42 +100,27 @@ public class World : MonoBehaviour
                 //getting this thing up and running asap sounds like a solid idea. Also, the coffee is kicking in. Might need some
                 //more tho...hmmm.
                 //TODO: test on different screen sizes
-                newTile.transform.position = Vector3.zero;
+                float pos = backgroundTiles[backgroundTiles.Count - 1].transform.position.x + backgroundTileSize;
+
+                newTile.transform.position = Vector3.right * pos;
                 backgroundTiles.Add(newTile);
 
             }
 
 
-            //Check if oldest middlegroundTile is off screen
 
-            //Check if the oldest tile is off screen yet using AABB
-            MiddlegroundTile mtile = middlegroundTiles[0];
-
-            planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-            if (!GeometryUtility.TestPlanesAABB(planes, tile.GetComponent<Collider2D>().bounds))
-            {
-                //If the check fails, we can remove the tile
-                middlegroundTiles.RemoveAt(0);
-                Destroy(mtile.gameObject);
-
-                //Create a new tile at the end since we can assume our newest tile does not completely cover the screen anymore
-                MiddlegroundTile newTile = Instantiate(middlegroundPrefab, transform).GetComponent<MiddlegroundTile>();
-
-                //I cheated and placed the camera so that 0, 0, 0 is at the bottom, since thats much easier than calculating
-                //the location of the bottom of the camera. Probably not the best idea to cheat this early, but at the same time,
-                //getting this thing up and running asap sounds like a solid idea. Also, the coffee is kicking in. Might need some
-                //more tho...hmmm.
-                //TODO: test on different screen sizes
-                newTile.transform.position = Vector3.zero;
-                middlegroundTiles.Add(newTile);
-
-            }
 
             //Check if the oldest tile is off screen yet using AABB
             ForegroundTile ftile = foregroundTiles[0];
 
-            planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
-            if (!GeometryUtility.TestPlanesAABB(planes, tile.GetComponent<Collider2D>().bounds))
+            //planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+            //if (!GeometryUtility.TestPlanesAABB(planes, tile.GetComponent<Collider2D>().bounds))
+            float foregroundTileSize = ftile.GetComponent<BoxCollider2D>().size.x;
+
+            //At -size distance we are entirely on screen, at -2 we are entirely off screen. giving -2.5 for a little bit of leeway
+            //so players dont see popping in and out
+            despawnX = foregroundTileSize * -2.5f;
+            if (ftile.transform.position.x < despawnX)
             {
                 //If the check fails, we can remove the tile
                 foregroundTiles.RemoveAt(0);
@@ -152,8 +134,43 @@ public class World : MonoBehaviour
                 //getting this thing up and running asap sounds like a solid idea. Also, the coffee is kicking in. Might need some
                 //more tho...hmmm.
                 //TODO: test on different screen sizes
-                newTile.transform.position = Vector3.zero;
+                float pos = foregroundTiles[foregroundTiles.Count - 1].transform.position.x + foregroundTileSize;
+
+                newTile.transform.position = Vector3.right * pos;
                 foregroundTiles.Add(newTile);
+
+            }
+
+
+
+            //Check if the oldest tile is off screen yet using AABB
+            MiddlegroundTile mtile = middlegroundTiles[0];
+
+            //planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+            //if (!GeometryUtility.TestPlanesAABB(planes, tile.GetComponent<Collider2D>().bounds))
+            float middleTileSize = mtile.GetComponent<BoxCollider2D>().size.x;
+
+            //At -size distance we are entirely on screen, at -2 we are entirely off screen. giving -2.5 for a little bit of leeway
+            //so players dont see popping in and out
+            despawnX = middleTileSize * -2.5f;
+            if (mtile.transform.position.x < despawnX)
+            {
+                //If the check fails, we can remove the tile
+                middlegroundTiles.RemoveAt(0);
+                Destroy(mtile.gameObject);
+
+                //Create a new tile at the end since we can assume our newest tile does not completely cover the screen anymore
+                MiddlegroundTile newTile = Instantiate(middlegroundPrefab, transform).GetComponent<MiddlegroundTile>();
+
+                //I cheated and placed the camera so that 0, 0, 0 is at the bottom, since thats much easier than calculating
+                //the location of the bottom of the camera. Probably not the best idea to cheat this early, but at the same time,
+                //getting this thing up and running asap sounds like a solid idea. Also, the coffee is kicking in. Might need some
+                //more tho...hmmm.
+                //TODO: test on different screen sizes
+                float pos = middlegroundTiles[middlegroundTiles.Count - 1].transform.position.x + middleTileSize;
+
+                newTile.transform.position = Vector3.right * pos;
+                middlegroundTiles.Add(newTile);
 
             }
 

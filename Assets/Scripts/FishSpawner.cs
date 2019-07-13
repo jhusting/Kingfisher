@@ -28,7 +28,7 @@ public class FishSpawner : MonoBehaviour
     {
         world = GetComponent<World>();
 
-        StartCoroutine(SpawnFish());
+        //StartCoroutine(SpawnFish());
     }
 
 
