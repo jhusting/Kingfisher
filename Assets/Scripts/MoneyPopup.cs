@@ -16,7 +16,7 @@ public class MoneyPopup : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        moneyText.text = "+1";
+        //moneyText.text = "+1";
         rect = GetComponent<RectTransform>();
         startPosition = rect.anchoredPosition;
     }
@@ -38,6 +38,6 @@ public class MoneyPopup : MonoBehaviour
     {
         if(rect)
             startPosition = rect.anchoredPosition;
-        moneyText.text = x.ToString();
+        moneyText.text = "+" + x;
     }
 }

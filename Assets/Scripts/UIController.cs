@@ -75,10 +75,10 @@ public class UIController : MonoBehaviour
 
         Vector2 newViewportPoint = Vector2.zero;
         newViewportPoint.x = Camera.main.WorldToViewportPoint(fish.transform.position).x * 800;
-        newViewportPoint.y = Mathf.Clamp(40f + Camera.main.WorldToViewportPoint(fish.transform.position).y * 386, 0f, 386f);
+        newViewportPoint.y = Mathf.Clamp(20f + Camera.main.WorldToViewportPoint(fish.transform.position).y * 386, 0f, 386f);
 
         popRect.anchoredPosition = newViewportPoint;
-        Debug.Log(newViewportPoint);
+        Debug.Log(asFish.value);
 
         newPopup.SetMoneyAmount(asFish.value);
     }
