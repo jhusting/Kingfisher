@@ -21,11 +21,14 @@ public class Shop : MonoBehaviour
     {
         var upgrades = PlayerController.playerController.GetComponents<Upgrade>();
 
-
-        //Might not actually destroy the children tho. Will have to test and see.
+        
         for(int i = upgradePanel.transform.childCount - 1; i >= 0; i--)
         {
-            Destroy(upgradePanel.transform.GetChild(i).gameObject);
+            GameObject toBeDestroyed = upgradePanel.transform.GetChild(i).gameObject;
+            toBeDestroyed.transform.SetParent(null);
+            Destroy(toBeDestroyed);
+            
+            
         }
         
 

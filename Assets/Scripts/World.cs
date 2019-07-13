@@ -91,7 +91,7 @@ public class World : MonoBehaviour
 
             //At -size distance we are entirely on screen, at -2 we are entirely off screen. giving -2.5 for a little bit of leeway
             //so players dont see popping in and out
-            float despawnX = backgroundTileSize * -2.5f;
+            float despawnX = backgroundTileSize * -3f;
             if (btile.transform.position.x < despawnX)
             {
                 //If the check fails, we can remove the tile
@@ -125,7 +125,7 @@ public class World : MonoBehaviour
 
             //At -size distance we are entirely on screen, at -2 we are entirely off screen. giving -2.5 for a little bit of leeway
             //so players dont see popping in and out
-            despawnX = foregroundTileSize * -2.5f;
+            despawnX = foregroundTileSize * -3f;
             if (ftile.transform.position.x < despawnX)
             {
                 //If the check fails, we can remove the tile
@@ -158,7 +158,7 @@ public class World : MonoBehaviour
 
             //At -size distance we are entirely on screen, at -2 we are entirely off screen. giving -2.5 for a little bit of leeway
             //so players dont see popping in and out
-            despawnX = middleTileSize * -2.5f;
+            despawnX = middleTileSize * -3f;
             if (mtile.transform.position.x < despawnX)
             {
                 //If the check fails, we can remove the tile
