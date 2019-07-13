@@ -46,6 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 1
+  fishTag: 
+  fishBaseSpeed: 1
+  fishSpeedVariance: 0.3
+  sizeVariance: 0.25
+  alive: 1
 --- !u!212 &5918168266029100934
 SpriteRenderer:
   m_ObjectHideFlags: 0

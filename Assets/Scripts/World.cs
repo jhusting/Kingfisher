@@ -251,6 +251,7 @@ public class World : MonoBehaviour
         //All fish will spawn slightly to the right of the screen, so we attach it to the newest BackgroundTile to easily have it move with
         //the worlds move speed
         Fish newFish = Instantiate(fishPrefab, fishHolder.transform, true);
+        AttachObjectToMiddleground(newFish.gameObject);
 
         Vector3 newScale = fishHolder.transform.localScale;
         newScale.x = newFish.transform.localScale.x / newScale.x;

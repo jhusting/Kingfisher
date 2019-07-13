@@ -17,6 +17,8 @@ public class UIController : MonoBehaviour
 
     public MoneyPopup moneyPopupPrefab;
 
+    public Canvas HUD;
+
     [SerializeField]
     private AnimationCurve oxyShakeStrength;
     [SerializeField]
@@ -65,10 +67,18 @@ public class UIController : MonoBehaviour
     {
         Fish asFish = fish.GetComponent<Fish>();
 
-        MoneyPopup newPopup = Instantiate(moneyPopupPrefab, transform) as MoneyPopup;
+        MoneyPopup newPopup = Instantiate(moneyPopupPrefab, HUD.transform) as MoneyPopup;
         RectTransform popRect = newPopup.GetComponent<RectTransform>();
-        popRect.SetParent(transform, false);
-        popRect.position = Camera.main.WorldToViewportPoint(fish.transform.position);
+        popRect.SetParent(HUD.transform, false);
+
+        RectTransform thisRect = HUD.GetComponent<RectTransform>();
+
+        Vector2 newViewportPoint = Vector2.zero;
+        newViewportPoint.x = Camera.main.WorldToViewportPoint(fish.transform.position).x * 800;
+        newViewportPoint.y = Mathf.Clamp(40f + Camera.main.WorldToViewportPoint(fish.transform.position).y * 386, 0f, 386f);
+
+        popRect.anchoredPosition = newViewportPoint;
+        Debug.Log(newViewportPoint);
 
         newPopup.SetMoneyAmount(asFish.value);
     }

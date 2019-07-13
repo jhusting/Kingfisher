@@ -46,10 +46,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AnimationCurve camShakeCurve;
 
-
     private bool spearShot = false;
     public bool spearReturned = true;
-
 
     Coroutine swimUpRoutine;
 
@@ -67,7 +65,6 @@ public class PlayerController : MonoBehaviour
     public int currentValue { get; private set; }
 
     PlayerCharacter playerCharacter;
-
 
     public static PlayerController playerController { get; private set; }
 
@@ -162,6 +159,7 @@ public class PlayerController : MonoBehaviour
         targetSize = maxSize;
         spearShot = false;
         spearReturned = true;
+        moveSpeed = baseMoveSpeed;
     }
 
     void ReadInput()
