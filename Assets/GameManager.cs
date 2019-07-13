@@ -76,6 +76,11 @@ public class GameManager : MonoBehaviour
         gameHUD.gameObject.SetActive(false);
 
         Camera.main.transform.position = cameraInitialPos;
+
+        playerController.FinishRun();
+
+        gameLostScreen.SetActive(false);
+        
     }
 
     public void OnFishCaught(GameObject fish)

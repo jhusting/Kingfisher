@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     public float spearMaxDistance = 5f;
     public float spearStrength = 0f;
+    
 
     private Camera cam;
     [SerializeField]
@@ -55,11 +56,29 @@ public class PlayerController : MonoBehaviour
     private AnimationCurve diveCurveY;
 
     public RunFailedEvent runFailed { get; private set; }
+
+    //Amount of cash the player has available
+    public int cash { get; private set; }
     //Amount of cash the player has gotten on the current attempt
     public int currentValue { get; private set; }
 
+
+
+
+    public static PlayerController playerController { get; private set; }
+
     private void Awake()
     {
+        //Singleton
+        if(playerController != null)
+        {
+            Destroy(gameObject);
+        }else
+        {
+            playerController = this;
+        }
+
+
         runFailed = new RunFailedEvent();
     }
 
@@ -76,6 +95,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Dev cheats
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            AddCash(10000);
+        }
+
+
         RotateToMouse(gun);
 
         if (spearReturned && !spearShot)
@@ -319,5 +345,26 @@ public class PlayerController : MonoBehaviour
     public void OnFishCaught(GameObject fish)
     {
         currentValue += fish.GetComponent<Fish>().value;  
+    }
+
+    public void FinishRun()
+    {
+        AddCash(currentValue);
+        currentValue = 0;
+
+        var spearedFish = spear.GetComponentsInChildren<Fish>();
+        for(int i = spearedFish.Length - 1; i >= 0; i--)
+        {
+            Destroy(spearedFish[i].gameObject);
+        }
+
+        currOxygen = maxOxygen;
+
+        World.world.ResetRun();
+    }
+
+    public void AddCash(int amount)
+    {
+        cash += amount;
     }
 }

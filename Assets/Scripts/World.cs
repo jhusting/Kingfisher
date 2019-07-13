@@ -13,6 +13,22 @@ public class World : MonoBehaviour
 
     public GameObject backgroundPrefab;
 
+    public static World world { get; private set; }
+
+    void Awake()
+    {
+        //Make this a singleton
+        if (world != null)
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            world = this;
+        }
+    }
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -81,6 +97,11 @@ public class World : MonoBehaviour
     public BackgroundTile GetNewestTile()
     {
         return backgroundTiles[1];
+    }
+    
+    public void ResetRun()
+    {
+        distanceTravelled = 0;
     }
 
     public void AddNewFish(Fish fishPrefab, Vector3 location)
