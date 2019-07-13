@@ -72,4 +72,10 @@ public class FishSpawner : MonoBehaviour
             yield return null;
         }
     }
+
+
+    public void RemoveKingFish()
+    {
+        fishSpawnData.RemoveAt(fishSpawnData.Count - 1);
+    }
 }

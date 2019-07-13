@@ -1,6 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+
+public enum GameFinishedStatus
+{
+    Continue,
+    Restart,
+    Loss
+}
+
+public class GameFinishedEvent : UnityEvent<GameFinishedStatus>{}
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +21,11 @@ public class GameManager : MonoBehaviour
 
     public Canvas gameHUD;
     public Canvas menuHUD;
+    public GameObject gameOverScreen;
+
+    public Vector3 cameraInitialPos;
+
+    public GameFinishedEvent gameFinished;
 
     void Awake()
     {
@@ -22,11 +38,18 @@ public class GameManager : MonoBehaviour
         {
             gameManager = this;
         }
+
+        gameFinished = new GameFinishedEvent();
+        
     }
+    
 
     void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
+
+        FindObjectOfType<Spear>().FishCaughtEvent.AddListener(OnFishCaught);
+        cameraInitialPos = Camera.main.transform.position;
     }
 
     public void StartDive()
@@ -42,5 +65,34 @@ public class GameManager : MonoBehaviour
     {
         menuHUD.gameObject.SetActive(true);
         gameHUD.gameObject.SetActive(false);
+
+        Camera.main.transform.position = cameraInitialPos;
+    }
+
+    public void OnFishCaught(GameObject fish)
+    {
+        if (fish.GetComponent<Fish>().fishTag == "king")
+        {
+            //Player has won
+            gameOverScreen.gameObject.SetActive(true);
+            FindObjectOfType<FishSpawner>().RemoveKingFish();
+        }
+    }
+
+
+    public void OnPlayerContinue()
+    {
+        gameFinished.Invoke(GameFinishedStatus.Continue);
+        gameOverScreen.SetActive(false);
+        BackToMenu();
+    }
+
+
+
+    public void OnPlayerRestart()
+    {
+        gameOverScreen.SetActive(false);
+        gameFinished.Invoke(GameFinishedStatus.Restart);
+        
     }
 }

@@ -33,12 +33,14 @@ public class UIController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (pc.underWater)
         {
             underHUD.alpha = 1f;
         }
         else
             underHUD.alpha = 0f;
+           */
         oxySlider.value = pc.GetOxygenPercent();
         currSpeed.text = "" + pc.moveSpeed;
 

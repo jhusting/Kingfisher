@@ -1,14 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
+public class GameObjectEvent : UnityEvent<GameObject> { }
+
 
 public class Spear : MonoBehaviour
 {
     public PlayerController playerController;
 
+    public GameObjectEvent FishCaughtEvent;
+
+    void Awake()
+    {
+
+        FishCaughtEvent = new GameObjectEvent();
+    }
+
     void Start()
     {
         playerController = FindObjectOfType<PlayerController>();
+
     }
 
     void OnTriggerEnter2D(Collider2D col)
@@ -24,7 +37,7 @@ public class Spear : MonoBehaviour
             //Set the collision to disabled to prevent it from knocking other fish around
             col.enabled = false;
 
-            playerController.AddCurrentValue(fishHit.value);
+            FishCaughtEvent.Invoke(fishHit.gameObject);
         }
     }
 }

@@ -6,6 +6,7 @@ public class Fish : MonoBehaviour
 {
 
     public int value = 1;
+    public string fishTag = "";
 
     // Start is called before the first frame update
     void Start()
