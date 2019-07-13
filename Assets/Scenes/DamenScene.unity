@@ -1635,6 +1635,7 @@ MonoBehaviour:
   gameHUD: {fileID: 803716330}
   menuHUD: {fileID: 1552977938}
   gameOverScreen: {fileID: 1560175443}
+  gameLostScreen: {fileID: 1964000037}
   cameraInitialPos: {x: 0, y: 0, z: 0}
 --- !u!4 &707116046
 Transform:
@@ -3885,9 +3886,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Congratulations! You won!
-
-    You caught the King Fish!'
+  m_Text: Oh no, you lost!
 --- !u!222 &1796251175
 CanvasRenderer:
   m_ObjectHideFlags: 0

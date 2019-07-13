@@ -54,7 +54,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AnimationCurve diveCurveY;
 
-    private RunFailedEvent runFailed;
+    public RunFailedEvent runFailed { get; private set; }
     //Amount of cash the player has gotten on the current attempt
     public int currentValue { get; private set; }
 

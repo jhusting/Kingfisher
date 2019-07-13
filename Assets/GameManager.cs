@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-
 public enum GameFinishedStatus
 {
     Continue,
@@ -22,6 +21,7 @@ public class GameManager : MonoBehaviour
     public Canvas gameHUD;
     public Canvas menuHUD;
     public GameObject gameOverScreen;
+    public GameObject gameLostScreen;
 
     public Vector3 cameraInitialPos;
 
@@ -50,6 +50,15 @@ public class GameManager : MonoBehaviour
 
         FindObjectOfType<Spear>().FishCaughtEvent.AddListener(OnFishCaught);
         cameraInitialPos = Camera.main.transform.position;
+
+        playerController.runFailed.AddListener(OnRunFailed);
+    }
+
+    void OnRunFailed(RunFailedStatus status)
+    {
+        gameLostScreen.SetActive(true);
+
+
     }
 
     public void StartDive()
