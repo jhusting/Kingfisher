@@ -57,7 +57,7 @@ MonoBehaviour:
   maxSize: 5.5
   targetSize: 5
   baseMoveSpeed: 0.2
-  burstMovementModifier: 12
+  burstMovementModifier: 11
   maxOxygen: 100
   oxygenBurnRate: 0.2
   burstCurve:
@@ -100,8 +100,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.9937744
-      value: 0.069667816
+      time: 1
+      value: 0
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -330,6 +330,7 @@ MonoBehaviour:
     m_PreInfinity: 1
     m_PostInfinity: 1
     m_RotationOrder: 4
+  spearReturned: 1
   diveCurveX:
     serializedVersion: 2
     m_Curve:
