@@ -4,16 +4,17 @@ using UnityEngine;
 
 public class World : MonoBehaviour
 {
-
     public float backgroundSpeed { get; private set; }
     public float middlegroundSpeed { get; private set; }
     public float foregroundSpeed { get; private set; }
+    public float cloudSpeed { get; private set; }
 
     public float distanceTravelled { get; private set; }
 
     private List<BackgroundTile> backgroundTiles;
     private List<MiddlegroundTile> middlegroundTiles;
     private List<ForegroundTile> foregroundTiles;
+    private List<CloudTile> cloudTiles;
 
 
     //By default all fish are speed up based on the world speed. Lowering this will lower the effect world speed has on fish.
@@ -26,6 +27,7 @@ public class World : MonoBehaviour
     public GameObject backgroundPrefab;
     public GameObject middlegroundPrefab;
     public GameObject foregroundPrefab;
+    public GameObject cloudPrefab;
 
     public static World world { get; private set; }
 
@@ -50,11 +52,13 @@ public class World : MonoBehaviour
         backgroundSpeed = 1.5f;
         middlegroundSpeed = 2f;
         foregroundSpeed = 2.5f;
+        cloudSpeed = 0.8f;
 
         //Initialize our background tiles. We assume some tiles are already placed in the scene
         backgroundTiles = new List<BackgroundTile>();
         middlegroundTiles = new List<MiddlegroundTile>();
         foregroundTiles = new List<ForegroundTile>();
+        cloudTiles = new List<CloudTile>();
 
         foreach (BackgroundTile bt in GetComponentsInChildren<BackgroundTile>())
         {
@@ -69,6 +73,11 @@ public class World : MonoBehaviour
         foreach (ForegroundTile ft in GetComponentsInChildren<ForegroundTile>())
         {
             foregroundTiles.Add(ft);
+        }
+
+        foreach (CloudTile ct in GetComponentsInChildren<CloudTile>())
+        {
+            cloudTiles.Add(ct);
         }
 
         pc = FindObjectOfType<PlayerController>();
@@ -179,6 +188,37 @@ public class World : MonoBehaviour
 
             }
 
+            //Check if the oldest tile is off screen yet using AABB
+            CloudTile ctile = cloudTiles[0];
+
+            //planes = GeometryUtility.CalculateFrustumPlanes(Camera.main);
+            //if (!GeometryUtility.TestPlanesAABB(planes, tile.GetComponent<Collider2D>().bounds))
+            float cloudTileSize = ctile.GetComponent<BoxCollider2D>().size.x;
+
+            //At -size distance we are entirely on screen, at -2 we are entirely off screen. giving -2.5 for a little bit of leeway
+            //so players dont see popping in and out
+            despawnX = cloudTileSize * -3f;
+            if (ctile.transform.position.x < despawnX)
+            {
+                //If the check fails, we can remove the tile
+                cloudTiles.RemoveAt(0);
+                Destroy(ctile.gameObject);
+
+                //Create a new tile at the end since we can assume our newest tile does not completely cover the screen anymore
+                CloudTile newTile = Instantiate(cloudPrefab, transform).GetComponent<CloudTile>();
+
+                //I cheated and placed the camera so that 0, 0, 0 is at the bottom, since thats much easier than calculating
+                //the location of the bottom of the camera. Probably not the best idea to cheat this early, but at the same time,
+                //getting this thing up and running asap sounds like a solid idea. Also, the coffee is kicking in. Might need some
+                //more tho...hmmm.
+                //TODO: test on different screen sizes
+                float pos = cloudTiles[cloudTiles.Count - 1].transform.position.x + cloudTileSize;
+
+                newTile.transform.position = Vector3.right * pos;
+                cloudTiles.Add(newTile);
+
+            }
+
 
 
 
@@ -200,6 +240,12 @@ public class World : MonoBehaviour
             foreach (ForegroundTile go in foregroundTiles)
             {
                 go.transform.position = go.transform.position + Vector3.left * pc.moveSpeed * foregroundSpeed * Time.deltaTime;
+            }
+
+            //Move each tile upwards
+            foreach (CloudTile go in cloudTiles)
+            {
+                go.transform.position = go.transform.position + Vector3.left * pc.moveSpeed * cloudSpeed * Time.deltaTime;
             }
 
             if (pc.underWater)

@@ -63,7 +63,7 @@ public class Spear : MonoBehaviour
 
             //Set the collision to disabled to prevent it from knocking other fish around
             col.enabled = false;
-            fishHit.alive = false;
+            fishHit.SetAlive(false);
             FishCaughtEvent.Invoke(fishHit.gameObject);
 
             SoundController sc = playerController.GetComponent<SoundController>();

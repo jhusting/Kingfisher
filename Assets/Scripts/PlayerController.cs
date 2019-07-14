@@ -57,6 +57,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private AnimationCurve diveCurveY;
 
+
+    [SerializeField]
+    public AnimationCurve diveRotationZ;
+
+    public AnimationCurve swimUpRotationZ;
+
     public RunFailedEvent runFailed { get; private set; }
 
     //Amount of cash the player has available
@@ -68,6 +74,7 @@ public class PlayerController : MonoBehaviour
 
     private SoundController soundController;
     private Animator animator;
+
 
     public static PlayerController playerController { get; private set; }
 
@@ -366,6 +373,8 @@ public class PlayerController : MonoBehaviour
 
             //Move player according to the curve
             playerCharacter.transform.position = new Vector3(x, y, 0);
+            float rotationZ = diveRotationZ.Evaluate(currentTime / diveTime);
+            playerCharacter.transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotationZ));
 
             Vector3 camStart = new Vector3(-26.7f, 7.85f, -10f);
             Vector3 camEnd = new Vector3(0, -1.76f, -10f);
@@ -416,13 +425,28 @@ public class PlayerController : MonoBehaviour
     
     IEnumerator SwimUp()
     {
-        float swimUpSpeed = 1f;
 
+        float swimUpDuration = 2f;
+        float currentTime = 0;
+
+        float targetY = 5f;
         //The coroutine is stopped when the player starts a new run
-        while (true && playerCharacter.transform.position.y < 5f)
-        {
-            playerCharacter.transform.position += Vector3.up * swimUpSpeed * Time.deltaTime;
 
+        float startY = playerCharacter.transform.position.y;
+
+        while (currentTime < swimUpDuration)
+        {
+            float y = targetY - (targetY - startY) * (1 - currentTime / swimUpDuration);
+            Vector3 pos = playerCharacter.transform.position;
+            pos.y = y;
+            playerCharacter.transform.position = pos;
+
+            float rotationZ = swimUpRotationZ.Evaluate(currentTime / swimUpDuration);
+
+            playerCharacter.transform.rotation = Quaternion.Euler(new Vector3(0, 0, rotationZ));
+
+
+            currentTime += Time.deltaTime;
             yield return null;
         }
 
