@@ -17,6 +17,11 @@ public class Spear : MonoBehaviour
     private Rigidbody2D rb;
     private bool spawningBubbles = false;
 
+    LineRenderer lr;
+
+    public GameObject endOfGun;
+    public GameObject spearEnd;
+
     void Awake()
     {
 
@@ -27,10 +32,23 @@ public class Spear : MonoBehaviour
     {
         playerController = FindObjectOfType<PlayerController>();
         rb = GetComponent<Rigidbody2D>();
+
+        lr = GetComponent<LineRenderer>();
     }
 
     private void Update()
     {
+
+        if(playerController.spearReturned){
+            lr.enabled = false;
+        }else
+        {
+            lr.enabled = true;
+        }
+        //lr.SetPosition(2, transform.InverseTransformVector(endOfGun.transform.position));
+        lr.SetPosition(0, transform.GetChild(0).transform.position - Vector3.forward);
+        lr.SetPosition(1, endOfGun.transform.position - Vector3.forward);
+
         if(!playerController.spearReturned)
         {
             float speed = 2f * playerController.moveSpeed;
@@ -42,6 +60,7 @@ public class Spear : MonoBehaviour
             float spawnRate = Random.Range(0.05f, 0.2f);
             StartCoroutine(SpawnBubbles(spawnRate));
         }
+
         else if (spawningBubbles && rb.velocity.magnitude <= 1f)
         {
             StopAllCoroutines();

@@ -41,6 +41,14 @@ public class MoneyPopup : MonoBehaviour
 
             rect.localScale = new Vector3(size, size, size);
         }
+
+        if(Camera.main.ScreenToWorldPoint(rect.position).y > 5f)
+        {
+            Pop();
+        }else
+        {
+            Debug.Log(Camera.main.ScreenToWorldPoint(rect.position).y);
+        }
     }
 
     public void SetMoneyAmount(int x)
@@ -48,5 +56,10 @@ public class MoneyPopup : MonoBehaviour
         if(rect)
             startPosition = rect.anchoredPosition;
         moneyText.text = "+" + x;
+    }
+
+    public void Pop()
+    {
+        Destroy(gameObject);
     }
 }
