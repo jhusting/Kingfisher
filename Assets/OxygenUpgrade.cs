@@ -24,6 +24,6 @@ public class OxygenUpgrade : Upgrade
 
     public override string GetDescription()
     {
-        return "Increases the amount of oxygen available";
+        return "Increases oxygen amount.";
     }
 }

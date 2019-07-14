@@ -64,8 +64,10 @@ public class PlayerController : MonoBehaviour
     //Amount of cash the player has gotten on the current attempt
     public int currentValue { get; private set; }
 
-    [SerializeField]
     PlayerCharacter playerCharacter;
+
+    private SoundController soundController;
+    private Animator animator;
 
     public static PlayerController playerController { get; private set; }
 
@@ -88,10 +90,12 @@ public class PlayerController : MonoBehaviour
     {
         currOxygen = maxOxygen;
         cam = Camera.main;
-        //StartBreathing();
+
+        soundController = GetComponent<SoundController>();
 
         spear.GetComponent<Spear>().FishCaughtEvent.AddListener(OnFishCaught);
         playerCharacter = FindObjectOfType<PlayerCharacter>();
+        animator = playerCharacter.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -102,6 +106,8 @@ public class PlayerController : MonoBehaviour
         {
             AddCash(10000);
         }
+
+        animator.speed = Mathf.Clamp(moveSpeed * 2f, 0f, 1.2f);
 
         if (underWater)
         {
@@ -157,6 +163,8 @@ public class PlayerController : MonoBehaviour
         spearRB.velocity = Vector3.zero;
         spearReturned = true;
 
+        soundController.Loop("over");
+
         targetSize = maxSize;
         spearShot = false;
         spearReturned = true;
@@ -179,6 +187,8 @@ public class PlayerController : MonoBehaviour
 
                 StopCoroutine("CamZoom");
                 StartCoroutine("CamZoom");
+
+                soundController.Play("breathin");
             }
 
             if (Input.GetKeyUp("space"))
@@ -190,6 +200,7 @@ public class PlayerController : MonoBehaviour
                 StartCoroutine("CamZoom");
 
                 StartCoroutine("ExhaleParticles");
+                soundController.Play("breathout");
             }
 
             if (Input.GetMouseButtonDown(0))
@@ -218,6 +229,7 @@ public class PlayerController : MonoBehaviour
                     ParticleSystem ps = Instantiate(shotBubblesPrefab, partPos, gun.transform.rotation, w.GetNewestTile().transform) as ParticleSystem;
 
                     //rope.gameObject.SetActive(true);
+                    soundController.Play("speargun");
                     spearStrength = 0f;
                     spearShot = true;
                     spearReturned = false;
@@ -254,7 +266,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator InhaleBurst()
     {
         float time = 0f;
-        while (Input.GetKey("space"))
+        while (time < 1f)
         {
             currOxygen = Mathf.Clamp(currOxygen - oxygenBurnRate * burstCurve.Evaluate(time), 0f, maxOxygen);
             time += Time.deltaTime;
@@ -327,6 +339,7 @@ public class PlayerController : MonoBehaviour
             yield return null;
         }
 
+        soundController.Play("breathin");
         runFailed.Invoke(RunFailedStatus.HeldBreath);
     }
 
@@ -334,14 +347,22 @@ public class PlayerController : MonoBehaviour
     {
         if (!playerCharacter)
             playerCharacter = FindObjectOfType<PlayerCharacter>();
-        //else
-            //playerCharacter.gameObject.SetActive(true);
+
+        soundController.Play("jump");
 
         float currentTime = 0;
+        bool playedSplashSound = false;
         while(currentTime <= diveTime)
         {
             float x = diveCurveX.Evaluate(currentTime / diveTime);
             float y = diveCurveY.Evaluate(currentTime / diveTime);
+
+            if(!playedSplashSound && currentTime / diveTime > 0.6f)
+            {
+                soundController.Play("splash");
+                soundController.Loop("under2");
+                playedSplashSound = true;
+            }
 
             //Move player according to the curve
             playerCharacter.transform.position = new Vector3(x, y, 0);

@@ -37,6 +37,9 @@ public class Shop : MonoBehaviour
             var upgradeOption = Instantiate(upgradeOptionPrefab, upgradePanel.transform);
             upgradeOption.transform.SetParent(upgradePanel.transform);
             upgradeOption.InitializeWithUpgrade(u);
+
+            if (u.myIcon)
+                upgradeOption.upgradeIcon.sprite = u.myIcon;
         }
     }
 }

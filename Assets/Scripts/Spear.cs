@@ -39,8 +39,8 @@ public class Spear : MonoBehaviour
 
         if (rb.velocity.magnitude > 1f && !spawningBubbles)
         {
-            float spawnRate = Random.Range(0.03f, 0.07f);
-            //StartCoroutine(SpawnBubbles(spawnRate));
+            float spawnRate = Random.Range(0.05f, 0.2f);
+            StartCoroutine(SpawnBubbles(spawnRate));
         }
         else if (spawningBubbles && rb.velocity.magnitude <= 1f)
         {
@@ -60,12 +60,15 @@ public class Spear : MonoBehaviour
             fishHit.transform.rotation = rot;
 
             UIController uic = FindObjectOfType<UIController>();
-            //uic.SpawnMoneyPopup(fishHit.transform.position, fishHit.value);
 
             //Set the collision to disabled to prevent it from knocking other fish around
             col.enabled = false;
             fishHit.alive = false;
             FishCaughtEvent.Invoke(fishHit.gameObject);
+
+            SoundController sc = playerController.GetComponent<SoundController>();
+
+            sc.Play("bubble");
         }
     }
 

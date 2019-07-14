@@ -110,7 +110,6 @@ public class World : MonoBehaviour
 
                 newTile.transform.position = Vector3.right * pos;
                 backgroundTiles.Add(newTile);
-
             }
 
 

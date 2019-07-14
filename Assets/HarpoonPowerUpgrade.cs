@@ -23,6 +23,6 @@ public class HarpoonPowerUpgrade : Upgrade
 
     public override string GetDescription()
     {
-        return "Increases harpoon power by an additional 2";
+        return "Increases harpoon power.";
     }
 }

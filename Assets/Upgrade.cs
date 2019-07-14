@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Upgrade : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Upgrade : MonoBehaviour
     [SerializeField]
     public int maxLevel { get; private set; }
 
+    public Sprite myIcon;
 
     public string upgradeName;
 
@@ -55,7 +57,7 @@ public class Upgrade : MonoBehaviour
     //Override this to change the cost if an upgrade is more valuable
     virtual public int GetCostToUpgrade()
     {
-        return currentLevel * 100;
+        return currentLevel * 50;
     }
 
 

@@ -29,6 +29,6 @@ public class MoveSpeedUpgrade : Upgrade
 
     public override string GetDescription()
     {
-        return "Increase move speed by an additional 0.5";
+        return "Increases move speed.";
     }
 }
