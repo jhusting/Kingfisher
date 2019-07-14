@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1514726534346426315}
   - component: {fileID: 1514726534346426312}
-  - component: {fileID: 6783901045734113264}
   - component: {fileID: 2931506590161277736}
+  - component: {fileID: 5864713906839163890}
   m_Layer: 0
   m_Name: CloudsTile
   m_TagString: Untagged
@@ -69,7 +69,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: -3
+  m_SortingOrder: -7
   m_Sprite: {fileID: 21300000, guid: 81c452f7bf2b51047b3673be7db1fde5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -81,18 +81,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &6783901045734113264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514726534346426313}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2bd0e403de1a60c44ac7686784d8b06e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!61 &2931506590161277736
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -109,7 +97,7 @@ BoxCollider2D:
   m_Offset: {x: 11, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0, y: 0.5}
     oldSize: {x: 22, y: 21.6}
     newSize: {x: 2.56, y: 0.68}
     adaptiveTilingThreshold: 0.5
@@ -119,3 +107,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 22, y: 21.6}
   m_EdgeRadius: 0
+--- !u!114 &5864713906839163890
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514726534346426313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e626acdb38ec5e46b05ae2bf716fcff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

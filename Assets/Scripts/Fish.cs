@@ -16,6 +16,8 @@ public class Fish : MonoBehaviour
 
     public bool alive = true;
 
+    public Sprite deadSprite;
+
     //Speed of the fish after variance is taken into account. Does not account for world speed
     public float fishFinalSpeed { get; private set; }
 
@@ -33,6 +35,18 @@ public class Fish : MonoBehaviour
         if (alive)
         {
             transform.localPosition += Vector3.right * -1 * fishFinalSpeed * Time.deltaTime;
+        }
+    }
+
+    public void SetAlive(bool alive)
+    {
+        this.alive = alive;
+        if(alive == false)
+        {
+            if(deadSprite != null)
+            {
+                GetComponent<SpriteRenderer>().sprite = deadSprite;
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public enum GameFinishedStatus
 {
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     public Vector3 cameraInitialPos;
 
     public GameFinishedEvent gameFinished;
+
+    public Text gameLostText;
 
     void Awake()
     {
@@ -56,6 +59,19 @@ public class GameManager : MonoBehaviour
 
     void OnRunFailed(RunFailedStatus status)
     {
+
+        switch (status)
+        {
+            case RunFailedStatus.HeldBreath:
+                gameLostText.text = "You ran out of breath! Don't forget to breath!";
+                break;
+            case RunFailedStatus.NoOxygen:
+                gameLostText.text = "Oh no! You ran out of oxygen!";
+                break;
+
+        }
+
+
         gameLostScreen.SetActive(true);
         playerController.FinishRun();
 

@@ -51,6 +51,7 @@ MonoBehaviour:
   fishSpeedVariance: 2
   sizeVariance: 0.25
   alive: 1
+  deadSprite: {fileID: 21300000, guid: aec463b31a044bf4abf2d937e460c45c, type: 3}
 --- !u!212 &5918168266029100934
 SpriteRenderer:
   m_ObjectHideFlags: 0
