@@ -362,7 +362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 259.22998, y: -105}
+  m_AnchoredPosition: {x: 220.9, y: -105}
   m_SizeDelta: {x: 428.45996, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &102297069
@@ -888,7 +888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 259.22998, y: -240}
+  m_AnchoredPosition: {x: 220.9, y: -240}
   m_SizeDelta: {x: 206, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &279551140
@@ -1374,7 +1374,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 55e3e5743badf6c4bbd42afb4703b251, type: 3}
     m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
@@ -1865,7 +1865,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 55e3e5743badf6c4bbd42afb4703b251, type: 3}
     m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
@@ -2213,7 +2213,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 259.22998, y: -305}
+  m_AnchoredPosition: {x: 220.9, y: -305}
   m_SizeDelta: {x: 206, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &643965932
@@ -2251,11 +2251,22 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 643965933}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 707116045}
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &643965933
@@ -3530,7 +3541,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 55e3e5743badf6c4bbd42afb4703b251, type: 3}
-    m_FontSize: 47
+    m_FontSize: 46
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -3685,7 +3696,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 55e3e5743badf6c4bbd42afb4703b251, type: 3}
     m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
@@ -4367,7 +4378,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 55e3e5743badf6c4bbd42afb4703b251, type: 3}
-    m_FontSize: 47
+    m_FontSize: 46
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -4380,7 +4391,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: You need to manage your breath! Press and hold space to breath in, then
     release space to breath out. Breathing will give you a boost of speed and consume
-    some oxygen
+    some oxygen.
 --- !u!222 &1170198002
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4647,7 +4658,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 55e3e5743badf6c4bbd42afb4703b251, type: 3}
-    m_FontSize: 47
+    m_FontSize: 46
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 3
@@ -5457,7 +5468,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 260, y: -204.12238}
+  m_AnchoredPosition: {x: 193.25, y: -180.67159}
   m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1443794344
@@ -5835,7 +5846,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 55e3e5743badf6c4bbd42afb4703b251, type: 3}
     m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
@@ -5892,7 +5903,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 260, y: -286.08145}
+  m_AnchoredPosition: {x: 193.25, y: -246.99681}
   m_SizeDelta: {x: 200, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1544615551
@@ -5930,11 +5941,22 @@ MonoBehaviour:
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
-  m_Interactable: 0
+  m_Interactable: 1
   m_TargetGraphic: {fileID: 1544615552}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 707116045}
+        m_MethodName: QuitGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1544615552
@@ -6218,7 +6240,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -281.54, y: 18.78}
+  m_SizeDelta: {x: -358.2, y: -50.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1560175445
 MonoBehaviour:
@@ -6256,7 +6278,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8867924, g: 0.8867924, b: 0.8867924, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6699,7 +6721,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: 55e3e5743badf6c4bbd42afb4703b251, type: 3}
     m_FontSize: 28
     m_FontStyle: 0
     m_BestFit: 0
@@ -6922,7 +6944,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 260, y: -115.32142}
+  m_AnchoredPosition: {x: 193.25, y: -107.50449}
   m_SizeDelta: {x: 398.7, y: 83.68376}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1796251174
@@ -7015,7 +7037,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 259.22998, y: -175}
+  m_AnchoredPosition: {x: 220.9, y: -175}
   m_SizeDelta: {x: 206.23, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1896014088
@@ -7402,8 +7424,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -280, y: 18.000002}
+  m_AnchoredPosition: {x: -0.000030517578, y: 0}
+  m_SizeDelta: {x: -413.5, y: -102.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1964000039
 MonoBehaviour:
@@ -7441,7 +7463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
