@@ -23,6 +23,11 @@ public class SoundController : MonoBehaviour
     {
     }
 
+    public void SetVolume(float i)
+    {
+        source.volume = Mathf.Clamp(i, 0f, 1f);
+    }
+
     public void Play(string s)
     {
         s = s.ToLower();
