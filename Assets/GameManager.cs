@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
 
     public void StartDive()
     {
-
         playerController.StartCoroutine(playerController.DiveIn(2f));
         menuHUD.gameObject.SetActive(false);
         gameHUD.gameObject.SetActive(true);

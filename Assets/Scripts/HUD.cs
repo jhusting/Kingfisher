@@ -21,7 +21,7 @@ public class HUD : MonoBehaviour
     void Update()
     {
         //Update the current value text
-        currentValueText.text = "Current value: $" + playerController.currentValue.ToString();
-        currentDistanceText.text = world.distanceTravelled.ToString() + "m";
+        currentValueText.text = playerController.currentValue.ToString();
+        currentDistanceText.text = world.distanceTravelled.ToString("F1") + "m";
     }
 }

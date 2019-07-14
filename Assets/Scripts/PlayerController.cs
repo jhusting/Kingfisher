@@ -64,6 +64,7 @@ public class PlayerController : MonoBehaviour
     //Amount of cash the player has gotten on the current attempt
     public int currentValue { get; private set; }
 
+    [SerializeField]
     PlayerCharacter playerCharacter;
 
     public static PlayerController playerController { get; private set; }
@@ -320,7 +321,7 @@ public class PlayerController : MonoBehaviour
 
             time += Time.deltaTime;
 
-            pos.x = startingX + 0.05f * camZoomCurve.Evaluate(time / zoomTime) * camShakeCurve.Evaluate((time % 0.3f) / 0.3f);
+            pos.x = startingX + 0.1f * camZoomCurve.Evaluate(time / zoomTime) * camShakeCurve.Evaluate((time % 0.3f) / 0.3f);
             cam.transform.position = pos;
 
             yield return null;
@@ -331,7 +332,11 @@ public class PlayerController : MonoBehaviour
 
     public IEnumerator DiveIn(float diveTime)
     {
-        PlayerCharacter playerCharacter = FindObjectOfType<PlayerCharacter>();
+        if (!playerCharacter)
+            playerCharacter = FindObjectOfType<PlayerCharacter>();
+        //else
+            //playerCharacter.gameObject.SetActive(true);
+
         float currentTime = 0;
         while(currentTime <= diveTime)
         {
@@ -393,11 +398,14 @@ public class PlayerController : MonoBehaviour
         float swimUpSpeed = 1f;
 
         //The coroutine is stopped when the player starts a new run
-        while (true)
+        while (true && playerCharacter.transform.position.y < 5f)
         {
             playerCharacter.transform.position += Vector3.up * swimUpSpeed * Time.deltaTime;
+
             yield return null;
         }
+
+        //playerCharacter.gameObject.SetActive(false);
     }
 
     public void AddBaseMoveSpeed(float amount)

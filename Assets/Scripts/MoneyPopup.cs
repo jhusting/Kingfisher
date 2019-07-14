@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class MoneyPopup : MonoBehaviour
 {
     public Text moneyText;
+    [SerializeField]
+    private AnimationCurve sizeCurve;
     private Vector3 startPosition;
     private RectTransform rect;
 
@@ -32,6 +34,13 @@ public class MoneyPopup : MonoBehaviour
         currPosition.y += speed * Time.deltaTime;
 
         rect.anchoredPosition = currPosition;
+
+        if(time < 1f)
+        {
+            float size = sizeCurve.Evaluate(time);
+
+            rect.localScale = new Vector3(size, size, size);
+        }
     }
 
     public void SetMoneyAmount(int x)

@@ -9,11 +9,10 @@ public class UIController : MonoBehaviour
     private RectTransform oxyRect;
 
     public Slider strengthSlider;
-    public Text currSpeed;
 
     public PlayerController pc;
 
-    public CanvasGroup underHUD;
+    public CanvasGroup spearStrength;
 
     public MoneyPopup moneyPopupPrefab;
 
@@ -23,7 +22,6 @@ public class UIController : MonoBehaviour
     private AnimationCurve oxyShakeStrength;
     [SerializeField]
     private AnimationCurve shakeCurve;
-    private float waitTime = 0.8f;
     private bool shaking = false;
 
     public Canvas worldSpaceCanvas;
@@ -36,21 +34,13 @@ public class UIController : MonoBehaviour
         oxyStartPos = oxyRect.anchoredPosition;
 
         FindObjectOfType<Spear>().FishCaughtEvent.AddListener(SpawnMoneyPopup2);
+        spearStrength = strengthSlider.GetComponent<CanvasGroup>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        /*
-        if (pc.underWater)
-        {
-            underHUD.alpha = 1f;
-        }
-        else
-            underHUD.alpha = 0f;
-           */
         oxySlider.value = pc.GetOxygenPercent();
-        currSpeed.text = "" + pc.moveSpeed;
 
         if (pc.spearStrength > 0f)
         {
@@ -59,6 +49,15 @@ public class UIController : MonoBehaviour
         }
         else
             strengthSlider.value = 0f;
+
+        if (Input.GetMouseButton(0) && pc.spearReturned)
+        {
+            spearStrength.alpha = 1f;
+        }
+        else
+        {
+            spearStrength.alpha = 0f;
+        }
 
         OxygenTick();
     }
@@ -78,7 +77,6 @@ public class UIController : MonoBehaviour
         newViewportPoint.y = Mathf.Clamp(20f + Camera.main.WorldToViewportPoint(fish.transform.position).y * 386, 0f, 386f);
 
         popRect.anchoredPosition = newViewportPoint;
-        Debug.Log(asFish.value);
 
         newPopup.SetMoneyAmount(asFish.value);
     }
@@ -98,18 +96,19 @@ public class UIController : MonoBehaviour
     {
         float strength = oxyShakeStrength.Evaluate(1f - oxySlider.value);
 
+
         if(!shaking)
-            StartCoroutine(OxyShake(0.3f*strength, strength));
+            StartCoroutine(OxyShake(.2f + 0.15f*(1f-strength), strength, 0.25f + 0.55f * (1f-strength)));
     }
 
-    IEnumerator OxyShake(float shakeTime, float strength)
+    IEnumerator OxyShake(float shakeTime, float strength, float waitTime)
     {
         float time = 0;
         shaking = true;
 
         for (; time < shakeTime; time += Time.deltaTime)
         {
-            float newX = oxyStartPos.x + (shakeCurve.Evaluate(time / shakeTime) - 0.5f) * strength * 0.3f;
+            float newX = oxyStartPos.x + (shakeCurve.Evaluate(time / shakeTime) - 0.5f) * strength * 5f;
 
             oxyRect.anchoredPosition = new Vector2(newX, oxyStartPos.y);
 
