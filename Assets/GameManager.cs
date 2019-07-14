@@ -61,6 +61,11 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
     public void StartDive()
     {
         playerController.StartCoroutine(playerController.DiveIn(2f));
