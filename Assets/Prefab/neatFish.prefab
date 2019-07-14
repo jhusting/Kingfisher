@@ -45,10 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd4e58c66f78324392f75500005bae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 5
+  value: 3
   fishTag: 
   fishBaseSpeed: 2
   fishSpeedVariance: 2
+  sizeVariance: 0.25
   alive: 1
 --- !u!212 &5918168266029100934
 SpriteRenderer:

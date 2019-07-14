@@ -4552,9 +4552,9 @@ RectTransform:
   m_Father: {fileID: 1552977941}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: 392.97}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -64, y: -147.03}
   m_SizeDelta: {x: 1000, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1192889744
@@ -8011,18 +8011,18 @@ MonoBehaviour:
   fishSpawnData:
   - fish: {fileID: 5918168266029100933, guid: 5202882e498a79a409453e8021b68fff, type: 3}
     minimumDistanceToSpawn: 0
-    maximumDistanceToSpawn: 100
-  - fish: {fileID: 5918168266029100933, guid: 5a3535fdd7b5bc14190de4c46ed49d60, type: 3}
-    minimumDistanceToSpawn: 25
-    maximumDistanceToSpawn: 200
+    maximumDistanceToSpawn: 85
   - fish: {fileID: 5918168266029100933, guid: 2acf390b896ba8944b85f755506b0a4b, type: 3}
-    minimumDistanceToSpawn: 35
+    minimumDistanceToSpawn: 25
+    maximumDistanceToSpawn: 145
+  - fish: {fileID: 5918168266029100933, guid: 5a3535fdd7b5bc14190de4c46ed49d60, type: 3}
+    minimumDistanceToSpawn: 65
     maximumDistanceToSpawn: 400
   - fish: {fileID: 5918168266029100933, guid: 8c380d288dddc734cb9c3f6a5cbaee2b, type: 3}
-    minimumDistanceToSpawn: 55
+    minimumDistanceToSpawn: 120
     maximumDistanceToSpawn: 9999999
   - fish: {fileID: 5918168266029100933, guid: ecc03c4498fed6c46bb20d04d2b6ed9e, type: 3}
-    minimumDistanceToSpawn: 120
+    minimumDistanceToSpawn: 225
     maximumDistanceToSpawn: 9999999
   timeBetweenSpawns: 2
   spawnTimeVariance: 1.5

@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdd4e58c66f78324392f75500005bae4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 3
+  value: 5
   fishTag: 
   fishBaseSpeed: 4
   fishSpeedVariance: 1
