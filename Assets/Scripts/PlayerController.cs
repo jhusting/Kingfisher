@@ -301,7 +301,7 @@ public class PlayerController : MonoBehaviour
     IEnumerator SpearReturn()
     {
         Vector3 currPos = spear.transform.localPosition;
-        float reelSpeed = 5f;
+        float reelSpeed = spearMaxDistance;
 
         while(Vector3.Distance(currPos, Vector3.zero) > reelSpeed*Time.deltaTime)
         {

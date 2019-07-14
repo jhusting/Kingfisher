@@ -113,4 +113,9 @@ public class GameManager : MonoBehaviour
         gameFinished.Invoke(GameFinishedStatus.Restart);
         
     }
+
+    public void OpenURL(string s)
+    {
+        Application.OpenURL(s);
+    }
 }
