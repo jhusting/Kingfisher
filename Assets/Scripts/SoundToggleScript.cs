@@ -30,6 +30,7 @@ public class SoundToggleScript : MonoBehaviour
     {
         if(state)
         {
+            myImage = GetComponent<Image>();
             myImage.sprite = onSprite;
 
             if(sc)

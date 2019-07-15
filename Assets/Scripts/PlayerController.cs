@@ -48,19 +48,15 @@ public class PlayerController : MonoBehaviour
 
     private bool spearShot = false;
     public bool spearReturned = true;
+    private bool reeling = false;
 
     Coroutine swimUpRoutine;
 
     [SerializeField]
     private AnimationCurve diveCurveX;
-
     [SerializeField]
-    private AnimationCurve diveCurveY;
-
-
-    [SerializeField]
+    private AnimationCurve diveCurveY;[SerializeField]
     public AnimationCurve diveRotationZ;
-
     public AnimationCurve swimUpRotationZ;
 
     public RunFailedEvent runFailed { get; private set; }
@@ -212,17 +208,20 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(0))
             {
-                if (!spearShot)
+                if (!reeling && spearReturned)
                 {
                     StartCoroutine("SpearCharge");
                 }
                 else
+                {
                     StartCoroutine("SpearReturn");
+                    reeling = true;
+                }
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                if (!spearShot)
+                if (spearReturned && !reeling)
                 {
                     Vector3 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - spear.transform.position;
                     Rigidbody2D spearRB = spear.GetComponent<Rigidbody2D>();
@@ -238,12 +237,12 @@ public class PlayerController : MonoBehaviour
                     //rope.gameObject.SetActive(true);
                     soundController.Play("speargun");
                     spearStrength = 0f;
-                    spearShot = true;
+                    //spearShot = true;
                     spearReturned = false;
                 }
-                else
+                else 
                 {
-                    spearShot = false;
+                    reeling = false;
                 }
             }
         }

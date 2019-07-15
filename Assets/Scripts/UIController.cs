@@ -13,6 +13,7 @@ public class UIController : MonoBehaviour
     public PlayerController pc;
 
     public CanvasGroup spearStrength;
+    public CanvasGroup clickAnim;
 
     public MoneyPopup moneyPopupPrefab;
 
@@ -50,14 +51,20 @@ public class UIController : MonoBehaviour
         else
             strengthSlider.value = 0f;
 
-        if (Input.GetMouseButton(0) && pc.spearReturned)
+        if (Input.GetMouseButton(0) && pc.spearStrength > 0f)
         {
             spearStrength.alpha = 1f;
+            Debug.Log("Charging");
         }
         else
         {
             spearStrength.alpha = 0f;
         }
+
+        if (!pc.spearReturned)
+            clickAnim.alpha = 1f;
+        else
+            clickAnim.alpha = 0f;
 
         OxygenTick();
     }

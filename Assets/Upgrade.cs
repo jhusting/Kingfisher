@@ -57,7 +57,7 @@ public class Upgrade : MonoBehaviour
     //Override this to change the cost if an upgrade is more valuable
     virtual public int GetCostToUpgrade()
     {
-        return currentLevel * 50;
+        return 20 + currentLevel * currentLevel * 5;
     }
 
 
