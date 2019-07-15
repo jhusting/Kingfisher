@@ -29,6 +29,11 @@ public class World : MonoBehaviour
     public GameObject foregroundPrefab;
     public GameObject cloudPrefab;
 
+    public GameObject seaweedPrefab;
+
+    public float seaweedSpawnRate = 4f;
+    public float seaweedSpawnVariance = 1f;
+
     public static World world { get; private set; }
 
     void Awake()
@@ -81,6 +86,8 @@ public class World : MonoBehaviour
         }
 
         pc = FindObjectOfType<PlayerController>();
+
+        StartCoroutine(SpawnSeaweed());
     }
 
     // Update is called once per frame
@@ -306,5 +313,19 @@ public class World : MonoBehaviour
         
 
         newFish.transform.position = location;
+    }
+
+    IEnumerator SpawnSeaweed()
+    {
+        while (true)
+        {
+            GameObject seaweed = Instantiate(seaweedPrefab);
+            AttachObjectToMiddleground(seaweed);
+            Vector3 newPosition = new Vector3(22, Random.Range(-9f, -4.5f), 0);
+            seaweed.transform.position = newPosition;
+            seaweed.transform.localScale *= Random.Range(0.9f, 1.1f);
+            yield return new WaitForSeconds(seaweedSpawnRate + Random.Range(seaweedSpawnVariance * -1, seaweedSpawnVariance));
+            
+        }
     }
 }
