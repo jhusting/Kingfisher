@@ -8,11 +8,19 @@ public class MoneyPopup : MonoBehaviour
     public Text moneyText;
     [SerializeField]
     private AnimationCurve sizeCurve;
+    [SerializeField]
+    private Sprite popSprite;
+    [SerializeField]
+    private Image i;
+    [SerializeField]
+    private Text t;
     private Vector3 startPosition;
     private RectTransform rect;
 
     private float time = 0f;
     private float speed = 0f;
+
+    private bool popping = false;
 
     //private AnimationCurve wobbleCurve;
     // Start is called before the first frame update
@@ -42,12 +50,10 @@ public class MoneyPopup : MonoBehaviour
             rect.localScale = new Vector3(size, size, size);
         }
 
-        if(Camera.main.ScreenToWorldPoint(rect.position).y > 5f)
+        if(Camera.main.ScreenToWorldPoint(rect.position).y > 5f && !popping)
         {
             Pop();
-        }else
-        {
-            Debug.Log(Camera.main.ScreenToWorldPoint(rect.position).y);
+            popping = true;
         }
     }
 
@@ -60,6 +66,20 @@ public class MoneyPopup : MonoBehaviour
 
     public void Pop()
     {
-        Destroy(gameObject);
+        StartCoroutine("PopAnim");
+    }
+
+    IEnumerator PopAnim()
+    {
+        SoundController sc = FindObjectOfType<SoundController>();
+        t.text = "";
+
+        if(i)
+            i.sprite = popSprite;
+
+        sc.Play("bubble");
+        yield return new WaitForSeconds(0.1f);
+
+        Destroy(this.gameObject);
     }
 }
