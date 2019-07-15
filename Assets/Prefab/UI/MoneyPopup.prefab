@@ -181,6 +181,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  popSprite: {fileID: 21300000, guid: c23a2a1f21ebde94e9f111f9182cf75d, type: 3}
+  i: {fileID: 3489449490862493337}
+  t: {fileID: 3489449489200347877}
 --- !u!1 &3489449490862493351
 GameObject:
   m_ObjectHideFlags: 0
